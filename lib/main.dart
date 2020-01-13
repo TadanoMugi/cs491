@@ -41,9 +41,9 @@ class MyApp extends StatelessWidget {
       child: Row(
         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(color, Icons.whatshot, 'CREATE'),
-          _buildButtonColumn(color, Icons.map, 'LOCATE'),
-          _buildButtonColumn(color, Icons.directions_car, 'DELIVER'),
+          _buildButtonColumn(Colors.deepOrangeAccent, Icons.whatshot, 'CREATE'),
+          _buildButtonColumn(Colors.teal, Icons.map, 'LOCATE'),
+          _buildButtonColumn(Colors.brown, Icons.directions_car, 'DELIVER'),
         ],
       ),
     );
@@ -94,8 +94,8 @@ class MyApp extends StatelessWidget {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700, 
+              fontSize: 14,
+              fontWeight: FontWeight.w900, 
               color: color,
             ),
           ),
