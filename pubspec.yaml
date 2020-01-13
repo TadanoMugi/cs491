@@ -1,0 +1,25 @@
+name: cs491
+description: A new Flutter project.
+version: 1.0.0+1
+
+# leave comments here:
+# 1/13/2020. I made the front page of our app. The buttons don't work yet. -CY
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+     - images/lake.jpg
+     - images/logo.png
