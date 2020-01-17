@@ -7,6 +7,9 @@ class HomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
 
+/* ==================================================
+// a function that is used to create the raised buttons
+================================================== */
     RaisedButton _buildButtonColumn(Color color, IconData icon, String label, String route) {
       return RaisedButton(
         color: Colors.grey[100],
@@ -37,9 +40,10 @@ class HomePageView extends StatelessWidget {
       );
     }
 
+/* ==================================================
 // this is for the text under the logo
+================================================== */
     Widget titleSection = Container( 
-      // padding: const EdgeInsets.all(32),
       child: Row(
         children: [
           Expanded(
@@ -63,22 +67,24 @@ class HomePageView extends StatelessWidget {
       ),
     );
 
+/* ==================================================
 // these will link to different pages
+================================================== */
     Widget buttonSection = Container(
       padding: const EdgeInsets.symmetric(vertical: 50),
       child: Row(
         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
         children: [
           _buildButtonColumn(Colors.deepOrange[500], Icons.whatshot, 'CREATE', SearchPageRoute),
-          // _buildButtonColumn(Colors.deepOrange[500], Icons.whatshot, 'CREATE'),
           _buildButtonColumn(Colors.teal[400], Icons.map, 'LOCATE', 'to_be_implemented'),
           _buildButtonColumn(Colors.brown, Icons.directions_car, 'DELIVER', 'to_be_implemented'),
         ],
       ),
     );
 
- 
+/* ==================================================
 // this is for account registration/login
+================================================== */
     Widget accountSection = Container(
       padding: const EdgeInsets.only(top: 30),
       child: Row(
@@ -90,7 +96,6 @@ class HomePageView extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'cs491 Recipe Finder',
       home: Scaffold(
         appBar: AppBar(
           title: Text('Recipe Finder'),
@@ -98,6 +103,7 @@ class HomePageView extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.only(top: 50),
           children: [
+            // This is where the columns are ordered
             Image.asset(
               'images/logo.png',
               width: 200,
@@ -111,27 +117,6 @@ class HomePageView extends StatelessWidget {
         ),
       ),
     );
-  }
+  } // Widget build
 
-  // Column _buildButtonColumn(Color color, IconData icon, String label) {
-  //   return Column(
-  //     mainAxisSize: MainAxisSize.min,
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     children: [
-  //       Icon(icon, color: color, size: 50),
-  //       Container(
-  //         margin: const EdgeInsets.only(top: 8),
-  //         child: Text(
-  //           label,
-  //           style: TextStyle(
-  //             fontSize: 14,
-  //             fontWeight: FontWeight.w900, 
-  //             color: color,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
-}
+} // class HomePageView

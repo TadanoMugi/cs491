@@ -4,6 +4,8 @@ version: 1.0.0+1
 
 # leave comments here:
 # 1/13/2020. I made the front page of our app. The buttons don't work yet. -CY
+# 1/16/2020. I changed the structure of the project so that the pages of the app are separated into
+# different dart files. The routes.dart file is used to control which pages everything goes to. -CY 
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
