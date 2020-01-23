@@ -55,7 +55,7 @@ class HomePageView extends StatelessWidget {
                   child: Text(
                     'Recipe Finder',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 30,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
@@ -97,9 +97,9 @@ class HomePageView extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Recipe Finder'),
-        ),
+        // appBar: AppBar(
+        //   title: Text('Recipe Finder'),
+        // ),
         body: ListView(
           padding: const EdgeInsets.only(top: 50),
           children: [
