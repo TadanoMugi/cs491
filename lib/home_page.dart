@@ -77,7 +77,7 @@ class HomePageView extends StatelessWidget {
         children: [
           _buildButtonColumn(Colors.deepOrange[500], Icons.whatshot, 'CREATE', SearchPageRoute),
           _buildButtonColumn(Colors.teal[400], Icons.map, 'LOCATE', 'to_be_implemented'),
-          _buildButtonColumn(Colors.brown, Icons.directions_car, 'DELIVER', 'to_be_implemented'),
+          _buildButtonColumn(Colors.brown, Icons.directions_car, 'DELIVER', TestPageRoute),
         ],
       ),
     );
