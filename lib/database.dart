@@ -1,4 +1,5 @@
 import 'database_helper.dart';
+import 'recipe_class.dart';
 
 class StartPage 
 {
