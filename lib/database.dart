@@ -1,4 +1,4 @@
-import 'databasehelper.dart';
+import 'database_helper.dart';
 
 class StartPage 
 {
@@ -63,3 +63,4 @@ class StartPage
       final id = await database.insert(row);
       print('inserted row id: $id');
   }
+}

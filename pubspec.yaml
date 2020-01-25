@@ -8,7 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  sqflite: ^1.2.0
+  path_provider: ^1.5.1
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
