@@ -1,4 +1,4 @@
-
+/*
 import 'dart:io';
 
 import 'package:path/path.dart';
@@ -145,4 +145,6 @@ class DatabaseHelper
     Database db = await instance.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
+  
 }
+*/

@@ -1,6 +1,6 @@
 import 'database_helper.dart';
 import 'recipe_class.dart';
-
+/*
 class StartPage 
 {
     final database = DatabaseHelper.instance;
@@ -65,3 +65,4 @@ class StartPage
       print('inserted row id: $id');
   }
 }
+*/
