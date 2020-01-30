@@ -86,11 +86,38 @@ class HomePageView extends StatelessWidget {
 // this is for account registration/login
 ================================================== */
     Widget accountSection = Container(
-      padding: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(top: 150),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildButtonColumn(color, Icons.account_box, 'ACCOUNT', 'to_be_implemented'),
+          FlatButton(
+            // color: Colors.grey[100],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                // Padding(
+                //   padding: const EdgeInsets.all(4.0),
+                //   child: Icon(Icons.account_box, color: color, size: 40,),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    'ACCOUNT',
+                    style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900, 
+                    color: color,
+                    ),
+                  ),
+                ),
+              ]
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, 'to_be_implemented');
+            }
+          ),
+          // _buildButtonColumn(color, Icons.account_box, 'ACCOUNT', 'to_be_implemented'),
         ],
        ),
     );
