@@ -71,6 +71,7 @@ class HomePageView extends StatelessWidget {
 // these will link to different pages
 ================================================== */
     Widget buttonSection = Container(
+      
       padding: const EdgeInsets.symmetric(vertical: 50),
       child: Row(
         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
