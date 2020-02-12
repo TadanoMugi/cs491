@@ -9,9 +9,11 @@ class Recipe
   List<String> ingredients;
   //Nutrition nutrition;
   ByteBuffer image;
-  Grade grade;
+  double rating;
+  int numReviews;
   String url;
   String urlId;
+  String source;
   String prepTime;
   String cookingTime;
   String totalTime;    
@@ -21,7 +23,8 @@ class Recipe
       this.name = "";
       //this.nutrition = Objects.requireNonNull(nutrition);
       this.ingredients = new List();
-      this.grade = new Grade(0, 0);
+      this.rating = 0;
+      this.numReviews = 0;
       this.image = null;
       this.url = "";
       this.urlId = "";
@@ -36,7 +39,8 @@ class Recipe
       this.name = name;
       //this.nutrition = Objects.requireNonNull(nutrition);
       this.ingredients = ingredients;
-      this.grade = new Grade(score,count);
+      this.rating = score;
+      this.numReviews = count;
       this.image = image;
       this.url = url;
       this.urlId = urlId;
