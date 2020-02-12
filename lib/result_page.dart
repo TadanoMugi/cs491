@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'database_helper.dart';
+
 class ResultPageView extends StatelessWidget {
   const ResultPageView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DatabaseHelper database;
+    database.start();
+
     String imageOfRecipe = 'images/cookie.jpg';
     // String testImage = 'images/notCookie.png';
     String timeValue = '30m';

@@ -21,6 +21,7 @@ flutter:
   assets:
      - images/logo.png
      - images/cookie.jpg
+     - assets/RFDB.db
 
 
 # leave comments here:
