@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'routing_constants.dart';
+
 class SearchPageView extends StatelessWidget {
   final List<String> letters = ['baking powder',
 'eggs',
@@ -7183,6 +7185,13 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                       )),
                 ))
             .toList(),
+      ),
+      floatingActionButton: FloatingActionButton(
+          elevation: 10.0,
+          child: Icon(Icons.add),
+          onPressed: (){
+            Navigator.pushNamed(context, ResultPageRoute);
+          },
       ),
     );
   }
