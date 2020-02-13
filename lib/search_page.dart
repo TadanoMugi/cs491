@@ -7163,11 +7163,13 @@ class SearchPageView extends StatelessWidget {
 'tomato garlic pasta sauce',
 'crushed cheese crackers'
 ];
+GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Ingrediants'),
+        title: Text('Ingredients'),
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
@@ -7175,10 +7177,10 @@ class SearchPageView extends StatelessWidget {
             .map((data) => ListTile(
                   leading: Icon(null),
                   title: Text(data),
-                  onTap: () =>SnackBar(
-                        content: Text("$data Clicked!"),
+                  onTap: () => _scaffoldKey.currentState.showSnackBar(SnackBar(
+                        content: Text("$data added!"),
                         duration: Duration(seconds: 1),
-                      ),
+                      )),
                 ))
             .toList(),
       ),
