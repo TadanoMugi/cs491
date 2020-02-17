@@ -24,6 +24,12 @@ class ResultPageView extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Search Results')),
+        floatingActionButton: FloatingActionButton(
+          elevation: 10.0,
+          child: Icon(Icons.keyboard_backspace),
+          onPressed: () {
+            Navigator.pop(context);
+          },),
         body: Column(
           children: [
             recipeButton(titleValue,imageOfRecipe,timeValue,difficultyValue),
@@ -36,6 +42,11 @@ class ResultPageView extends StatelessWidget {
   } // Widget build
 
 } // class TestView
+
+
+
+
+
 
 /* *** FOR USE LATER ***
 import 'dart:io';
