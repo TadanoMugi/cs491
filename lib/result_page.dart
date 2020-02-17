@@ -8,7 +8,7 @@ class ResultPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DatabaseHelper database;
-    database.start();
+    //database.start();
 
     String imageOfRecipe = 'images/cookie.jpg';
     // String testImage = 'images/notCookie.png';
