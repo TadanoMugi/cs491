@@ -13,7 +13,10 @@ class TestPageView extends StatelessWidget {
     String outputText = 'helloworld';
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
+      floatingActionButton: FloatingActionButton(
+        elevation: 10.0,
+        child: Icon(Icons.keyboard_backspace),
+        onPressed: () {
         Navigator.pop(context);
       },),
       body: Center(
