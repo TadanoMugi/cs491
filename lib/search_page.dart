@@ -20,11 +20,14 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
           .map((data) => ListTile(
                 leading: Icon(null),
                 title: Text(data),
-                onTap: () => _scaffoldKey.currentState.showSnackBar(SnackBar(
-                      content: Text("$data added!"),
+                onTap: () { basket.add(data);
+                 _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text("Added $data!"),
                       duration: Duration(seconds: 1),
 // @terrance, figure out how to add these to basket from basket.dart
-                    )),
+                    ));
+                }
+                    
               ))
           .toList(),
       ),
