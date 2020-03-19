@@ -22,6 +22,7 @@ flutter:
      - images/logo.png
      - images/cookie.jpg
      - assets/RFDB.db
+     - images/gif_cry.gif
 
 
 # leave comments here:

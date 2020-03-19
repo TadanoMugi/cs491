@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ingredients.dart';
-import 'routing_constants.dart';
+// import 'routing_constants.dart';
 import 'basket.dart';
 
 class SearchPageView extends StatelessWidget {
@@ -24,7 +24,6 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                  _scaffoldKey.currentState.showSnackBar(SnackBar(
                       content: Text("Added $data!"),
                       duration: Duration(seconds: 1),
-// @terrance, figure out how to add these to basket from basket.dart
                     ));
                 }
                     
