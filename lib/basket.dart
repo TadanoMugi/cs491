@@ -85,8 +85,8 @@ class _MyBasketState extends State<MyBasket> {
             // *WARNING: weeb gif
             Image.asset(
               "images/gif_cry.gif",
-              height: 100.0,
-              width: 100.0,
+              height: 200.0,
+              width: 200.0,
             ),
             Text('THE LIST IS EMPTY')
           ],

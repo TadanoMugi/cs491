@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'drawer.dart';
 import 'ingredients.dart';
 // import 'routing_constants.dart';
 import 'basket.dart';
@@ -11,6 +12,7 @@ GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      drawer: MyDrawer(),
       appBar: AppBar(
         title: Text('Ingredients'),
       ),

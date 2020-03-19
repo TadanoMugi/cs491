@@ -1,6 +1,8 @@
 import 'package:cs491/routing_constants.dart';
 import 'package:flutter/material.dart';
 
+import 'drawer.dart';
+
 class HomePageView extends StatelessWidget {
   
   @override
@@ -128,6 +130,7 @@ class HomePageView extends StatelessWidget {
         // appBar: AppBar(
         //   title: Text('Recipe Finder'),
         // ),
+        drawer: MyDrawer(),
         body: ListView(
           padding: const EdgeInsets.only(top: 50),
           children: [

@@ -23,7 +23,8 @@ flutter:
      - images/cookie.jpg
      - assets/RFDB.db
      - images/gif_cry.gif
-
+     - images/profile_default.png
+     - images/under_construction.gif
 
 # leave comments here:
 # 1/13/2020. I made the front page of our app. The buttons don't work yet. -CY

@@ -10,8 +10,6 @@ class TestPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String outputText = 'helloworld';
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         elevation: 10.0,
@@ -24,7 +22,19 @@ class TestPageView extends StatelessWidget {
 // @Marc: text in here will be viewed in the middle
     of the page
 ================================================== */
-        child: Text(outputText),
+        child: Container(padding: const EdgeInsets.only(top: 200),
+        child: Column(children: <Widget>[
+          Text('UNDER CONSTRUCTION', style: TextStyle(fontSize: 25)),
+          SizedBox(height: 20),
+          // *WARNING: weeb gif
+          Image.asset(
+            'images/under_construction.gif',
+            height: 200,
+            width: 200,
+          ),
+          Text('uwu'),
+        ],))
+        
       ),
     );
   }
