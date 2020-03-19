@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /* ==================================================
 // imports to other pages collected here
 ================================================== */
+import 'database.dart';
 import 'home_page.dart';
 import 'result_page.dart';
 import 'routing_constants.dart';
@@ -21,6 +22,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => HomePageView());
     case SearchPageRoute:
       return MaterialPageRoute(builder: (context) => SearchPageView());
+    case DatabasePageRoute:
+      return MaterialPageRoute(builder: (context) => DatabasePageView());
     case ResultPageRoute:
       return MaterialPageRoute(builder: (context) => ResultPageView());
     case LoginPageRoute:

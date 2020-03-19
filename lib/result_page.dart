@@ -12,15 +12,12 @@ class ResultPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DatabaseHelper database;
-    // database.start();
-
     tempWidth = MediaQuery.of(context).size.width - 188;
 
     String imageOfRecipe = 'images/cookie.jpg';
     String timeValue = '30m';
     String difficultyValue = 'easy';
-    String titleValue = 'Peanut Butter Chip Chocolate Cookies';
+    String titleValue = 'Peanut Butter Chip Chocolate Cookies'; 
     
     return MaterialApp(
       home: Scaffold(

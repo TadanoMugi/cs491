@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'routing_constants.dart';
+import 'recipe_class.dart';
+import 'database.dart';
 
 // List<String> basket = new List<String>();
 List<String> basket = [];
@@ -47,7 +48,10 @@ Widget buildBasket(BuildContext context) {
           new SizedBox(width: 20,),
           new RaisedButton(
             color: Colors.grey[100],
-            onPressed: () {
+            onPressed: () async {
+                Future<List<Recipe>> tableData = startDatabase();
+                searchDatabase(await tableData, basket);
+                Navigator.pushNamed(context, ResultPageRoute);
               Navigator.pushNamed(context, ResultPageRoute);
             },
             textColor: Theme.of(context).primaryColor,
