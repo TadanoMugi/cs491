@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'routing_constants.dart';
 
 // List<String> basket = new List<String>();
-List<String> basket = ['chocolate', 'milk', 'sugar', 'flour', 
-//  'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test'
-  ];
+List<String> basket = [];
 
 Widget buildBasket(BuildContext context) {
   return new AlertDialog(
