@@ -46,113 +46,115 @@ Widget titleText(String title) {
   );
 }
 
-    Widget ratingSubSection = Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          Icon(
-            Icons.star_half,
-            color: Colors.red[500],
-          ),
-          Icon(
-            Icons.star_border,
-            color: Colors.red[500],
-          ),
-        ],
+Widget ratingSubSection = Container(
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Icon(
+        Icons.star,
+        color: Colors.red[500],
       ),
-    );
+      Icon(
+        Icons.star,
+        color: Colors.red[500],
+      ),
+      Icon(
+        Icons.star,
+        color: Colors.red[500],
+      ),
+      Icon(
+        Icons.star_half,
+        color: Colors.red[500],
+      ),
+      Icon(
+        Icons.star_border,
+        color: Colors.red[500],
+      ),
+    ],
+  ),
+);
 
-        Container imageRatingSection(String imageString) {
-      return Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            resizedImage(imageString),
-            ratingSubSection,
-          ],
-        ),
-      );
-    }
+Container imageRatingSection(String imageString) {
+  return Container(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        resizedImage(imageString),
+        ratingSubSection,
+      ],
+    ),
+  );
+}
 
-    Container timeSubSection(String time) {
-      return Container(
-        margin: EdgeInsets.all(5),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            boldBlackText('Time: '),
-            regularBlackText(time),
-          ],
-        ),
-      );
-    }
+Container timeSubSection(String time) {
+  return Container(
+    margin: EdgeInsets.all(5),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        boldBlackText('Time: '),
+        regularBlackText(time),
+      ],
+    ),
+  );
+}
 
-    Container difficultySubSection(String difficulty) {
-      return Container(
-        margin: EdgeInsets.all(5),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            boldBlackText('Difficulty: '),
-            regularBlackText(difficulty),
-          ],
-        ),
-      );
-    }
+Container difficultySubSection(String difficulty) {
+  return Container(
+    margin: EdgeInsets.all(5),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        boldBlackText('Difficulty: '),
+        regularBlackText(difficulty),
+      ],
+    ),
+  );
+}
 
-    Container titleSubSection(String title) {
-      return Container(
-        margin: EdgeInsets.only(top: 5, left: 5),  
-        constraints: new BoxConstraints(
-          maxWidth: tempWidth),
-          child: titleText(title),
-      );
-    }
+Container titleSubSection(String title) {
+  return Container(
+    margin: EdgeInsets.only(top: 5, left: 5),  
+    constraints: new BoxConstraints(
+      maxWidth: tempWidth),
+      child: titleText(title),
+  );
+}
 
-    Container titleTimeDifficultySecion(String title, String time, String difficulty) {
-      return Container(
-        margin: EdgeInsets.all(5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            titleSubSection(title),
-            timeSubSection(time),
-            difficultySubSection(difficulty),
-          ],
-        ),
-      );
-    }
+Container titleTimeDifficultySecion(String title, String time, String difficulty) {
+  return Container(
+    margin: EdgeInsets.all(5),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        titleSubSection(title),
+        timeSubSection(time),
+        difficultySubSection(difficulty),
+      ],
+    ),
+  );
+}
 
-    Container recipeButton(String title, String image, String time, String difficulty) {
-      return Container(
-        margin: EdgeInsets.only(top: 5, bottom: 5),
-        child: Row(
-          children: [
-            imageRatingSection(image),
-            titleTimeDifficultySecion(title, time, difficulty),
-            FavoriteWidget(),
-          ],
-        ),
-      );
-    } // Container _recipeButton
+FlatButton recipeButton(String title, String image, String time, String difficulty) {
+  return FlatButton(
+    color: Colors.grey[100],
+    padding: EdgeInsets.only(top: 5, bottom: 5),
+    child: Row(
+      children: [
+        imageRatingSection(image),
+        titleTimeDifficultySecion(title, time, difficulty),
+        FavoriteWidget(),
+      ],
+    ),
+    onPressed: null,
+  );
+} // Container _recipeButton
 
     // the favorite button
 class FavoriteWidget extends StatefulWidget {

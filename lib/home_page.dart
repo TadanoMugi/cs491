@@ -87,7 +87,7 @@ class HomePageView extends StatelessWidget {
 // this is for account registration/login
 ================================================== */
     Widget accountSection = Container(
-      padding: const EdgeInsets.only(top: 150),
+      padding: const EdgeInsets.only(top: 140),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -104,9 +104,9 @@ class HomePageView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
-                    'ACCOUNT',
+                    'LOG IN',
                     style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w900, 
                     color: color,
                     ),
@@ -115,7 +115,7 @@ class HomePageView extends StatelessWidget {
               ]
             ),
             onPressed: () {
-              Navigator.pushNamed(context, 'to_be_implemented');
+              Navigator.pushNamed(context, LoginPageRoute);
             }
           ),
           // _buildButtonColumn(color, Icons.account_box, 'ACCOUNT', 'to_be_implemented'),

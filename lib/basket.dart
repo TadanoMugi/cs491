@@ -75,14 +75,32 @@ class _MyBasketState extends State<MyBasket> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: ListView.builder(
-      itemCount: list.length,
-      itemBuilder: (context, index) {
-        return MyItem(list[index], onDelete: () => removeItem(index));
-      },
-      )
-    );
+    if (list.length == 0) {
+      return new Scaffold(
+        body: Column(
+          children: <Widget>[
+            SizedBox(height: 40.0),
+            // *WARNING: weeb gif
+            Image.asset(
+              "images/gif_cry.gif",
+              height: 100.0,
+              width: 100.0,
+            ),
+            Text('THE LIST IS EMPTY')
+          ],
+        )
+        
+      );
+    } else {
+      return new Scaffold(
+        body: ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            return MyItem(list[index], onDelete: () => removeItem(index));
+          },
+        )
+      );
+    }
   }
 
 /* ==================================================
