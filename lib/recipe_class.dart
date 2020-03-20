@@ -1,13 +1,13 @@
 import'dart:core';
 import 'dart:typed_data';
-import 'grade_class.dart';
 import 'nutrition_class.dart';
-
+ 
 class Recipe
 {
   String name;
+  // new
   List<String> ingredients;
-  //Nutrition nutrition;
+  Nutrition nutrition;
   ByteBuffer image;
   double rating;
   int numReviews;
@@ -17,11 +17,12 @@ class Recipe
   String prepTime;
   String cookingTime;
   String totalTime;    
+  String cuisine;
 
   Recipe()
   {
       this.name = "";
-      //this.nutrition = Objects.requireNonNull(nutrition);
+      this.nutrition = null;
       this.ingredients = new List();
       this.rating = 0;
       this.numReviews = 0;
@@ -31,13 +32,14 @@ class Recipe
       this.prepTime = "";
       this.cookingTime = "";
       this.totalTime = "";
+      this.cuisine = "";
   }
 
-  SetRecipe(String name, List<String> ingredients, double score,int count, ByteBuffer image, 
+  SetRecipe(String name, Nutrition nutrition, List<String> ingredients, double score,int count, ByteBuffer image, 
             String url, String urlId, String prepTime, String cookingTime, String totalTime) 
   {
       this.name = name;
-      //this.nutrition = Objects.requireNonNull(nutrition);
+      this.nutrition = nutrition;
       this.ingredients = ingredients;
       this.rating = score;
       this.numReviews = count;

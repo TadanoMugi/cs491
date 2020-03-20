@@ -1,4 +1,4 @@
-class Nutrition 
+class Nutrition  
   {
       double calories;
       double fat;
@@ -16,7 +16,8 @@ class Nutrition
           this.cholesterol = cholesterol;
           this.sodium = sodium;
       }
-
+ 
+ 
       double getCalories() {
           return calories;
       }

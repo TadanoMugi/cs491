@@ -1,69 +1,150 @@
-/*
-import 'database_helper.dart';
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'recipe_class.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
-class StartPage 
-{
-    final database = DatabaseHelper.instance;
+Database database; 
+List<Recipe> perfectMatchList;
 
-    void _insert(Recipe recipe) async 
-    {
-      
-      // row to insert
-      Map<String, dynamic> row = 
-      {
-        DatabaseHelper.name : recipe.name,
-        DatabaseHelper.ingredient1 : recipe.ingredients[0],
-        DatabaseHelper.ingredient2 : recipe.ingredients[1],
-        DatabaseHelper.ingredient3 : recipe.ingredients[2],
-        DatabaseHelper.ingredient4 : recipe.ingredients[3],
-        DatabaseHelper.ingredient5 : recipe.ingredients[4],
-        DatabaseHelper.ingredient6 : recipe.ingredients[5],
-        DatabaseHelper.ingredient7 : recipe.ingredients[6],
-        DatabaseHelper.ingredient8 : recipe.ingredients[7],
-        DatabaseHelper.ingredient9 : recipe.ingredients[8],
-        DatabaseHelper.ingredient10 : recipe.ingredients[9],
-        DatabaseHelper.ingredient11 : recipe.ingredients[10],
-        DatabaseHelper.ingredient12 : recipe.ingredients[11],
-        DatabaseHelper.ingredient13 : recipe.ingredients[12],
-        DatabaseHelper.ingredient14 : recipe.ingredients[13],
-        DatabaseHelper.ingredient15 : recipe.ingredients[14],
-        DatabaseHelper.ingredient16 : recipe.ingredients[15],
-        DatabaseHelper.ingredient17 : recipe.ingredients[16],
-        DatabaseHelper.ingredient18 : recipe.ingredients[17],
-        DatabaseHelper.ingredient19 : recipe.ingredients[18],
-        DatabaseHelper.ingredient20 : recipe.ingredients[19],        
-        DatabaseHelper.ingredient21 : recipe.ingredients[20],
-        DatabaseHelper.ingredient22 : recipe.ingredients[21],
-        DatabaseHelper.ingredient23 : recipe.ingredients[22],
-        DatabaseHelper.ingredient24 : recipe.ingredients[23],
-        DatabaseHelper.ingredient25 : recipe.ingredients[24],
-        DatabaseHelper.ingredient26 : recipe.ingredients[25],
-        DatabaseHelper.ingredient27 : recipe.ingredients[26],
-        DatabaseHelper.ingredient28 : recipe.ingredients[27],
-        DatabaseHelper.ingredient29 : recipe.ingredients[28],
-        DatabaseHelper.ingredient30 : recipe.ingredients[29],
-        DatabaseHelper.ingredient31 : recipe.ingredients[30],
-        DatabaseHelper.ingredient32 : recipe.ingredients[31],
-        DatabaseHelper.ingredient33 : recipe.ingredients[32],
-        DatabaseHelper.ingredient34 : recipe.ingredients[33],
-        DatabaseHelper.ingredient35 : recipe.ingredients[34],
-        DatabaseHelper.ingredient36 : recipe.ingredients[35],
-        DatabaseHelper.ingredient37 : recipe.ingredients[36],
-        DatabaseHelper.ingredient38 : recipe.ingredients[37],
-        DatabaseHelper.ingredient39 : recipe.ingredients[38],
-        DatabaseHelper.ingredient40 : recipe.ingredients[39],
-        DatabaseHelper.rating : recipe.grade.rating,
-        DatabaseHelper.numOfReviews : recipe.grade.numReviews,
-        DatabaseHelper.url : recipe.url,
-        DatabaseHelper.urlId : recipe.urlId,
-        DatabaseHelper.source : "allrecipe",
-        DatabaseHelper.prepTime : recipe.prepTime,
-        DatabaseHelper.cookingTime : recipe.cookingTime,
-        DatabaseHelper.totalTime : recipe.totalTime
-      };
-      final id = await database.insert(row);
-      print('inserted row id: $id');
-  }
+class DatabasePageView extends StatelessWidget {
+  const DatabasePageView({Key key}) : super(key: key);
+
+  @override 
+  Widget build (BuildContext) {}
+  // @override
+  //   Widget build(BuildContext context) {
+  //    return MaterialApp(
+  //     home: Scaffold(
+  //       body: ListView(
+  //         children: [
+  //         new RaisedButton(
+  //            color: Colors.blue[100],
+  //           onPressed: () {
+  //             start();
+  //             Navigator.pushNamed(context, ResultPageRoute);
+  //           },
+  //         ),
+  //         ], 
+  //       ),
+  //     ),
+  //   );
+  // } // Widget build
+
 }
-*/
+
+Future<List<Recipe>> startDatabase() async
+{
+  WidgetsFlutterBinding.ensureInitialized();
+  var databasesPath = await getDatabasesPath(); 
+  String path = join(databasesPath, 'RFDB_working.db');
+
+  // Check if the database exists
+  var exists = await databaseExists(path);
+
+  if (!exists) {
+  // Should happen only the first time you launch your application
+    print("Creating new copy from asset");
+
+    //Make sure the parent directory exists
+    try {
+      await Directory(dirname(path)).create(recursive: true);
+    } catch (Exception) {
+      print(Exception);
+    }
+      
+    //Copy from asset
+    ByteData data = await rootBundle.load(join("assets/RFDB.db"));
+    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    
+    //Write and flush the bytes written
+    await File(path).writeAsBytes(bytes, flush: true);
+
+  } else {
+    print("Opening existing database");
+  }
+  // Open the database
+  database = await openDatabase(path, readOnly: true);
+  
+  print (database.isOpen);
+  List<Recipe> list = new List();
+  try
+  {
+    list = await retrieveData(database);
+  }catch (Exception)
+  {
+    print(Exception);
+  }
+
+  return list;
+} 
+
+//  NO RETURNS;     THIS NEEDS TO DEFINE A GLOBAL EACH TIME ITS CALLED TO RESET IT  ////
+void searchDatabase(List<Recipe> databaseTable, List<String> basket)
+{
+   perfectMatchList = new List<Recipe>();
+   try 
+   {
+      // Goes through all basket items each recipe (databaseTable holds every row as a linked list: ResultSet) 
+      // Ingredient columns: 4 - 44    
+      for (int index = 0; index < basket.length; index++) 
+      {
+        String ingredientSearched = basket.elementAt(index).toLowerCase();
+        String ingredientSearchedUpperCased = ingredientSearched.substring(0, 1).toUpperCase() + ingredientSearched.substring(1, ingredientSearched.length);
+        for(int j = 0; j < databaseTable.length; j++)
+        {
+          if (databaseTable[j].ingredients.contains(ingredientSearched) || 
+              databaseTable[j].ingredients.contains(ingredientSearchedUpperCased) )
+          {	
+            perfectMatchList.add(databaseTable[j]);
+            //print(databaseTable[j].name);
+          }
+        }
+      }
+    
+    } catch (Exception)
+    {
+      print("Search: Didn't work ");
+    }
+    print ("Search Works!!!");
+}
+
+
+Future<List<Recipe>> retrieveData(database) async 
+{
+  final List<Map<String, dynamic>> databaseTable = await database.rawQuery('SELECT * FROM recipetable');
+    Recipe recipe = new Recipe();
+    List<Recipe> recipeList = new List();
+
+    for (int i = 0; i < databaseTable.length; i++)
+    {
+      recipe.name = databaseTable[i]['_recipeName'];
+      recipe.image = databaseTable[i]['_image'];
+      for (int j = 1; j < 40; j++)
+      {
+        recipe.ingredients.add(databaseTable[i]['_ingredients' + j.toString()]);
+      }  
+      recipe.rating = databaseTable[i]['_rating'];
+      recipe.numReviews = databaseTable[i]['_numOfReviews'];
+      recipe.url = databaseTable[i]['_url'];
+      recipe.urlId = databaseTable[i]['_urlId'];
+      recipe.source = databaseTable[i]['_source'];
+      recipe.prepTime = databaseTable[i]['_prepTime'];
+      recipe.cookingTime = databaseTable[i]['_cookingTime'];
+      recipe.totalTime = databaseTable[i]['_totalTime'];
+      recipe.nutrition.calories = databaseTable[i]['_calories'];
+      recipe.nutrition.carbohydrates = databaseTable[i]['_carbohydrate'];
+      recipe.nutrition.cholesterol = databaseTable[i]['_cholesterol'];
+      recipe.nutrition.fat = databaseTable[i]['_fat'];
+      recipe.nutrition.sodium = databaseTable[i]['_sodium'];
+      recipe.nutrition.protein = databaseTable[i]['_protein'];
+      recipe.cuisine = databaseTable[i]["_cuisine"];
+
+      recipeList.add(recipe);
+    }
+
+    return recipeList;    
+}
+  
