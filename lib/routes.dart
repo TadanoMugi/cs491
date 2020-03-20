@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 // imports to other pages collected here
 ================================================== */
 import 'database.dart';
-import 'home_page.dart';
-import 'result_page.dart';
+import '_home_page.dart';
+import '_result_page.dart';
 import 'routing_constants.dart';
-import 'search_page.dart';
+import '_search_page.dart';
 import 'test_page.dart';
 import 'undefined_view.dart';
 import '_login_page.dart';
@@ -30,6 +30,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => LoginPageView());
     case RegisterPageRoute:
       return MaterialPageRoute(builder: (context) => RegisterPageView());
+    case DatabasePageRoute:
+      return MaterialPageRoute(builder: (context) => DatabasePageView());
 
     case TestPageRoute: /*temporary page*/
       return MaterialPageRoute(builder: (context) => TestPageView());

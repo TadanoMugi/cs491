@@ -5,6 +5,7 @@ class TestPageView extends StatelessWidget {
 
 /* ==================================================
 // this page is strictly for testing things
+// page is now weeb approved
 ================================================== */
 
   @override
@@ -18,10 +19,6 @@ class TestPageView extends StatelessWidget {
         Navigator.pop(context);
       },),
       body: Center(
-/* ==================================================
-// @Marc: text in here will be viewed in the middle
-    of the page
-================================================== */
         child: Container(padding: const EdgeInsets.only(top: 200),
         child: Column(children: <Widget>[
           Text('UNDER CONSTRUCTION', style: TextStyle(fontSize: 25)),
@@ -34,7 +31,7 @@ class TestPageView extends StatelessWidget {
           ),
           Text('uwu'),
         ],))
-        
+
       ),
     );
   }

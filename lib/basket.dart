@@ -4,7 +4,7 @@ import 'recipe_class.dart';
 import 'database.dart';
 
 // List<String> basket = new List<String>();
-List<String> basket = [];
+List<String> basket = []; 
 
 Widget buildBasket(BuildContext context) {
   return new AlertDialog(

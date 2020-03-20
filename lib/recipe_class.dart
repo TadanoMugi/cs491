@@ -1,7 +1,7 @@
 import'dart:core';
 import 'dart:typed_data';
 import 'nutrition_class.dart';
-
+ 
 class Recipe
 {
   String name;

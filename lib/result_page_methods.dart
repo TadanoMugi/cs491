@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'result_page.dart';
+import '_result_page.dart';
 
 // double fontSizeValue = 13;
 
