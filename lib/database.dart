@@ -113,7 +113,7 @@ Future<List<Recipe>> retrieveData(database) async
 
       // Recipe.Ingredients list: 0->39
       // tableIndex: 0->database.length
-      // '_ingredient': 1-40
+      // '_ingredient': 1-40 
       for (int ingredientIndex = 0, stringIndex = 1; ingredientIndex < 40; ingredientIndex++, stringIndex++) // 39 x 21 = 819 // j == 40 columns of ingredients
       {
         recipe.ingredients.add("");
