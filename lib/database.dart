@@ -116,7 +116,7 @@ Future<List<Recipe>> retrieveData(database) async
       // '_ingredient': 1-40
       for (int ingredientIndex = 0, stringIndex = 1; ingredientIndex < 40; ingredientIndex++, stringIndex++) // 39 x 21 = 819 // j == 40 columns of ingredients
       {
-       // recipe.ingredients.add("");
+        recipe.ingredients.add("");
         recipe.ingredients[ingredientIndex] = (databaseTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
         print("ingredient: " + recipe.ingredients[ingredientIndex].toString());
         // recipe.ingredients.add(databaseTable[i]['_ingredient' + (j).toString()]);
