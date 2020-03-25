@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'drawer.dart';
+import 'drawer_methods.dart';
 import 'ingredients.dart';
 // import 'routing_constants.dart';
 import 'basket.dart';
@@ -13,7 +13,7 @@ class SearchPageView extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Ingrediants'),
+      home: new MyHomePage(title: 'Ingredients'),
     );
   }
 }
@@ -64,7 +64,7 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      drawer: MyDrawer(),
+      drawer: getDrawer(),
       appBar: new AppBar(
         title: new Text(widget.title),
       ),

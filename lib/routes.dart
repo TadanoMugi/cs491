@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 /* ==================================================
 // imports to other pages collected here
 ================================================== */
+import '_user_favorites_page.dart';
+import '_user_history_page.dart';
+import '_user_preferences_page.dart';
 import 'database.dart';
 import '_home_page.dart';
 import '_result_page.dart';
@@ -32,6 +35,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => RegisterPageView());
     case DatabasePageRoute:
       return MaterialPageRoute(builder: (context) => DatabasePageView());
+    case HistoryPageRoute:
+      return MaterialPageRoute(builder: (context) => HistoryPageView());
+    case FavoritesPageRoute:
+      return MaterialPageRoute(builder: (context) => FavoritesPageView());
+    case PreferencesPageRoute:
+      return MaterialPageRoute(builder: (context) => PreferencesPageView());
 
     case TestPageRoute: /*temporary page*/
       return MaterialPageRoute(builder: (context) => TestPageView());

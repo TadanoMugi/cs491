@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'drawer.dart';
+import 'drawer_methods.dart';
 import 'result_page_methods.dart';
 
 double fontSizeValue = 13;
@@ -19,7 +19,7 @@ class ResultPageView extends StatelessWidget {
     
     return MaterialApp(
       home: Scaffold(
-        drawer: MyDrawer(),
+        drawer: getDrawer(),
         appBar: AppBar(title: Text('Search Results')),
         floatingActionButton: FloatingActionButton(
           elevation: 10.0,
@@ -31,7 +31,6 @@ class ResultPageView extends StatelessWidget {
           children: [
             // getRecipeButtons()
             // recipeButton(titleValue,imageOfRecipe,timeValue,difficultyValue),
-            // _recipeButton('testing',testImage,'',''),
           ],
         ),
       ),
