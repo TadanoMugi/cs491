@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import '_result_page.dart';
+import 'globals.dart';
 
-// double fontSizeValue = 13;
+double fontSizeValue = 13;
+
+Widget getRecipeButtons() {
+  List<Widget> list = new List<Widget>();
+  for (int i = 0; i < 5; i++) {
+    list.add(recipeButton(i));
+  }
+  return new Column(children: list);
+}
 
 Image resizedImage(String originalImage) {
-  return Image.asset(
+  return Image.network(
     originalImage,
     width: 120,
     height: 120,
@@ -46,43 +55,78 @@ Widget titleText(String title) {
   );
 }
 
-Widget ratingSubSection = Container(
-  child: Row(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      Icon(
-        Icons.star,
-        color: Colors.red[500],
-      ),
-      Icon(
-        Icons.star_half,
-        color: Colors.red[500],
-      ),
-      Icon(
-        Icons.star_border,
-        color: Colors.red[500],
-      ),
-    ],
-  ),
-);
+Icon full() {
+  return Icon(Icons.star,color: Colors.red);
+}
+Icon half() {
+  return Icon(Icons.star_half,color: Colors.red);
+}
+Icon empty() {
+  return Icon(Icons.star_border,color: Colors.red);
+}
 
-Container imageRatingSection(String imageString) {
+Icon getRatingIcon(double low, double high, int i) {
+  if (perfectMatchList[i].rating < low)
+    return empty();
+  else if (perfectMatchList[i].rating >= low && perfectMatchList[i].rating < high) 
+    return half();
+  else if (perfectMatchList[i].rating >= high)
+    return full();
+  return Icon(Icons.error);
+}
+
+Container ratingSubSection(int i) {
+  return Container(
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        full(),
+        getRatingIcon(1.25, 1.75, i),
+        getRatingIcon(2.25, 2.75, i),
+        getRatingIcon(3.25, 3.75, i),
+        getRatingIcon(4.25, 4.75, i),
+      ],
+    ),
+  );
+}
+// Widget ratingSubSection = Container(
+//   child: Row(
+//     mainAxisSize: MainAxisSize.min,
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//       Icon(
+//         Icons.star,
+//         color: Colors.red[500],
+//       ),
+//       Icon(
+//         Icons.star,
+//         color: Colors.red[500],
+//       ),
+//       Icon(
+//         Icons.star,
+//         color: Colors.red[500],
+//       ),
+//       Icon(
+//         Icons.star_half,
+//         color: Colors.red[500],
+//       ),
+//       Icon(
+//         Icons.star_border,
+//         color: Colors.red[500],
+//       ),
+//     ],
+//   ),
+// );
+
+Container imageRatingSection(String imageString, int i) {
   return Container(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         resizedImage(imageString),
-        ratingSubSection,
+        ratingSubSection(i),
       ],
     ),
   );
@@ -102,19 +146,19 @@ Container timeSubSection(String time) {
   );
 }
 
-Container difficultySubSection(String difficulty) {
-  return Container(
-    margin: EdgeInsets.all(5),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        boldBlackText('Difficulty: '),
-        regularBlackText(difficulty),
-      ],
-    ),
-  );
-}
+// Container difficultySubSection(String difficulty) {
+//   return Container(
+//     margin: EdgeInsets.all(5),
+//     child: Row(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.end,
+//       children: [
+//         boldBlackText('Difficulty: '),
+//         regularBlackText(difficulty),
+//       ],
+//     ),
+//   );
+// }
 
 Container titleSubSection(String title) {
   return Container(
@@ -125,7 +169,7 @@ Container titleSubSection(String title) {
   );
 }
 
-Container titleTimeDifficultySecion(String title, String time, String difficulty) {
+Container titleTimeDifficultySecion(String title, String time/*, String difficulty*/) {
   return Container(
     margin: EdgeInsets.all(5),
     child: Column(
@@ -134,27 +178,32 @@ Container titleTimeDifficultySecion(String title, String time, String difficulty
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         titleSubSection(title),
+        SizedBox(height: 20,),
         timeSubSection(time),
-        difficultySubSection(difficulty),
+        // difficultySubSection(difficulty),
       ],
     ),
   );
 }
 
-FlatButton recipeButton(String title, String image, String time, String difficulty) {
-  return FlatButton(
-    color: Colors.grey[100],
-    padding: EdgeInsets.only(top: 5, bottom: 5),
-    child: Row(
-      children: [
-        imageRatingSection(image),
-        titleTimeDifficultySecion(title, time, difficulty),
-        FavoriteWidget(),
-      ],
-    ),
-    onPressed: null,
+FlatButton recipeButton(int i) {
+    return FlatButton(
+      color: Colors.grey[100],
+      padding: EdgeInsets.only(top: 5, bottom: 5),
+      child: Row(
+        children: [
+          imageRatingSection(/*perfectMatchList[i].image*/tempurl, i),
+          titleTimeDifficultySecion(
+            perfectMatchList[i].name,
+            perfectMatchList[i].totalTime, 
+          ),
+          FavoriteWidget(),
+        ],
+      ),
+      onPressed: null,
   );
-} // Container _recipeButton
+
+} // Container recipeButton
 
     // the favorite button
 class FavoriteWidget extends StatefulWidget {

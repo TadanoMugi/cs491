@@ -29,9 +29,10 @@ class ResultPageView extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },),
-        body: Column(
+        body: ListView(
           children: [
-            recipeButton(titleValue,imageOfRecipe,timeValue,difficultyValue),
+            getRecipeButtons()
+            // recipeButton(titleValue,imageOfRecipe,timeValue,difficultyValue),
             // _recipeButton('testing',testImage,'',''),
           ],
         ),
