@@ -6,7 +6,8 @@ double fontSizeValue = 13;
 
 Widget getRecipeButtons() {
   List<Widget> list = new List<Widget>();
-  for (int i = 0; i < 1; i++) {
+  // print("list length: " + perfectMatchList.length.toString());
+  for (int i = 0; i < perfectMatchList.length; i++) {
     list.add(recipeButton(i));
   }
   return new Column(children: list);
