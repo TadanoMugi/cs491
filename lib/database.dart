@@ -103,35 +103,39 @@ Future<List<Recipe>> retrieveData(database) async
     List<Recipe> recipeList = new List();
     // String str = '';
 
-    for (int i = 0; i < databaseTable.length; i++) // i == 21 recipes inside db
+    for (int tableIndex = 0; tableIndex < databaseTable.length; tableIndex++) // i == 21 recipes inside db
     {
       Recipe recipe = new Recipe();
-      recipe.name = databaseTable[i]['_recipeName'];
+      recipe.name = databaseTable[tableIndex]['_recipeName'];
       // print ("recipeList Name: " + recipe.name);
-      recipe.image = databaseTable[i]['_image'];
+      recipe.image = databaseTable[tableIndex]['_image'];
       // recipe.ingredients.add(String());
-      for (int j = 1; j < 40; j++) // 39 x 21 = 819 // j == 40 columns of ingredients
+
+      // Recipe.Ingredients list: 0->39
+      // tableIndex: 0->database.length
+      // '_ingredient': 1-40
+      for (int ingredientIndex = 0, stringIndex = 1; ingredientIndex < 40; ingredientIndex++, stringIndex++) // 39 x 21 = 819 // j == 40 columns of ingredients
       {
-        recipe.ingredients.add("");
-        recipe.ingredients[j-1] = (databaseTable[i]['_ingredient' + (j).toString()]);
-        print("ingredient: " + recipe.ingredients[j].toString());
+       // recipe.ingredients.add("");
+        recipe.ingredients[ingredientIndex] = (databaseTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
+        print("ingredient: " + recipe.ingredients[ingredientIndex].toString());
         // recipe.ingredients.add(databaseTable[i]['_ingredient' + (j).toString()]);
       }  
-      recipe.rating = databaseTable[i]['_rating'].toDouble();
-      recipe.numReviews = databaseTable[i]['_numOfReviews'];
-      recipe.url = databaseTable[i]['_url'];
-      recipe.urlId = databaseTable[i]['_urlId'];
-      recipe.source = databaseTable[i]['_source'];
-      recipe.prepTime = databaseTable[i]['_prepTime'];
-      recipe.cookingTime = databaseTable[i]['_cookingTime'];
-      recipe.totalTime = databaseTable[i]['_totalTime'];
-      // recipe.nutrition.calories = databaseTable[i]['_calories'];
-      // recipe.nutrition.carbohydrates = databaseTable[i]['_carbohydrate'];
-      // recipe.nutrition.cholesterol = databaseTable[i]['_cholesterol'];
-      // recipe.nutrition.fat = databaseTable[i]['_fat'];
-      // recipe.nutrition.sodium = databaseTable[i]['_sodium'];
-      // recipe.nutrition.protein = databaseTable[i]['_protein'];
-      // recipe.cuisine = databaseTable[i]["_cuisine"];
+      recipe.rating = databaseTable[tableIndex]['_rating'].toDouble();
+      recipe.numReviews = databaseTable[tableIndex]['_numOfReviews'];
+      recipe.url = databaseTable[tableIndex]['_url'];
+      recipe.urlId = databaseTable[tableIndex]['_urlId'];
+      recipe.source = databaseTable[tableIndex]['_source'];
+      recipe.prepTime = databaseTable[tableIndex]['_prepTime'];
+      recipe.cookingTime = databaseTable[tableIndex]['_cookingTime'];
+      recipe.totalTime = databaseTable[tableIndex]['_totalTime'];
+      // recipe.nutrition.calories = databaseTable[tableIndex]['_calories'];
+      // recipe.nutrition.carbohydrates = databaseTable[tableIndex]['_carbohydrate'];
+      // recipe.nutrition.cholesterol = databaseTable[tableIndex]['_cholesterol'];
+      // recipe.nutrition.fat = databaseTable[tableIndex]['_fat'];
+      // recipe.nutrition.sodium = databaseTable[tableIndex]['_sodium'];
+      // recipe.nutrition.protein = databaseTable[tableIndex]['_protein'];
+      // recipe.cuisine = databaseTable[tableIndex]["_cuisine"];
 
       recipeList.add(recipe);
     }
