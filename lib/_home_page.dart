@@ -1,3 +1,4 @@
+import 'package:cs491/drawer_methods.dart';
 import 'package:cs491/routing_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -89,7 +90,7 @@ class HomePageView extends StatelessWidget {
 // this is for account registration/login
 ================================================== */
     Widget accountSection = Container(
-      padding: const EdgeInsets.only(top: 140),
+      padding: const EdgeInsets.only(top: 120),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -127,12 +128,12 @@ class HomePageView extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Recipe Finder'),
-        // ),
-        drawer: MyDrawer(),
+        appBar: AppBar(
+          title: Text(''),
+        ),
+        drawer: getDrawer(),
         body: ListView(
-          padding: const EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(top: 10),
           children: [
             // This is where the columns are ordered
             Image.asset(

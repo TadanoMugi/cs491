@@ -35,21 +35,21 @@ class Recipe
       this.cuisine = "";
   }
 
-  SetRecipe(String name, Nutrition nutrition, List<String> ingredients, double score,int count, ByteBuffer image, 
-            String url, String urlId, String prepTime, String cookingTime, String totalTime) 
-  {
-      this.name = name;
-      this.nutrition = nutrition;
-      this.ingredients = ingredients;
-      this.rating = score;
-      this.numReviews = count;
-      this.image = image;
-      this.url = url;
-      this.urlId = urlId;
-      this.prepTime = prepTime;
-      this.cookingTime = cookingTime;
-      this.totalTime = totalTime;
-  }
+  // SetRecipe(String name, Nutrition nutrition, List<String> ingredients, double score,int count, ByteBuffer image, 
+  //           String url, String urlId, String prepTime, String cookingTime, String totalTime) 
+  // {
+  //     this.name = name;
+  //     this.nutrition = nutrition;
+  //     this.ingredients = ingredients;
+  //     this.rating = score;
+  //     this.numReviews = count;
+  //     this.image = image;
+  //     this.url = url;
+  //     this.urlId = urlId;
+  //     this.prepTime = prepTime;
+  //     this.cookingTime = cookingTime;
+  //     this.totalTime = totalTime;
+  // }
 
   // Optional<ByteBuffer> getImage() {
   //     return Optional.of(image);
