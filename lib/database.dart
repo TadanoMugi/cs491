@@ -123,9 +123,13 @@ Future<List<Recipe>> retrieveData(database) async
       recipe.url = databaseTable[tableIndex]['_url'];
       recipe.urlId = databaseTable[tableIndex]['_urlId'];
       recipe.source = databaseTable[tableIndex]['_source'];
-      recipe.prepTime = databaseTable[tableIndex]['_prepTime'];
-      recipe.cookingTime = databaseTable[tableIndex]['_cookingTime'];
-      recipe.totalTime = databaseTable[tableIndex]['_totalTime'];
+      String tempPrepTime = databaseTable[tableIndex]['_prepTime'];
+      recipe.prepTime = tempPrepTime.toLowerCase().trim();
+      String tempCookingTime = databaseTable[tableIndex]['_cookingTime'];
+      recipe.cookingTime = tempCookingTime.toLowerCase().replaceAll(" : ", "").trim();
+      String tempTotalTime = databaseTable[tableIndex]['_totalTime'];
+      recipe.totalTime = tempTotalTime.toLowerCase().replaceAll("ready in ", "").trim();
+ 
       // recipe.nutrition.calories = databaseTable[tableIndex]['_calories'];
       // recipe.nutrition.carbohydrates = databaseTable[tableIndex]['_carbohydrate'];
       // recipe.nutrition.cholesterol = databaseTable[tableIndex]['_cholesterol'];
