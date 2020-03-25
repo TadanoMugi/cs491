@@ -66,21 +66,22 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
    perfectMatchList = new List<Recipe>();
    try 
    {
-
       // Goes through all basket items each recipe (databaseTable holds every row as a linked list: ResultSet) 
       // Ingredient columns: 4 - 44    
-      for (int index = 0; index < basket.length; index++) 
+      for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
       {
-        String ingredientSearched = basket.elementAt(index).toLowerCase();
-        String ingredientSearchedUpperCased = ingredientSearched.substring(0, 1).toUpperCase() + ingredientSearched.substring(1, ingredientSearched.length);
-        for(int j = 0; j < databaseTable.length; j++)
+        String ingredientSearched = basket.elementAt(basketIndex).toLowerCase(); // Basket ingredient -> lower case
+       // String ingredientSearchedUpperCased = ingredientSearched.substring(0, 1).toUpperCase() + ingredientSearched.substring(1, ingredientSearched.length);
+        
+        for(int tableIndex = 0; tableIndex < databaseTable.length; tableIndex++)
         {
-          // print ("dbTable length: " + databaseTable.length.toString());
-          if (databaseTable[j].ingredients.contains(ingredientSearched) || 
-              databaseTable[j].ingredients.contains(ingredientSearchedUpperCased) )
-          {	
-            perfectMatchList.add(databaseTable[j]);
-            print("dbTable: " + databaseTable[j].name);
+          for (int ingredientListIndex = 0; ingredientListIndex < 40; ingredientListIndex++)
+          {
+            String databaseTableIngredient = databaseTable[tableIndex].ingredients[ingredientListIndex].toLowerCase();
+            if (databaseTableIngredient.contains(ingredientSearched))
+            {	
+              perfectMatchList.add(databaseTable[tableIndex]);
+            }
           }
         }
       }
@@ -90,7 +91,6 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
       print("Search: Didn't work ");
     }
     
-    // print (perfectMatchList[0].name);
 }
 
 
@@ -116,7 +116,6 @@ Future<List<Recipe>> retrieveData(database) async
       {
         recipe.ingredients.add("");
         recipe.ingredients[ingredientIndex] = (databaseTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
-        print("ingredient: " + recipe.ingredients[ingredientIndex].toString());
         // recipe.ingredients.add(databaseTable[i]['_ingredient' + (j).toString()]);
       }  
       recipe.rating = databaseTable[tableIndex]['_rating'].toDouble();
