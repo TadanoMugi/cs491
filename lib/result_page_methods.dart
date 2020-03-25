@@ -6,7 +6,7 @@ double fontSizeValue = 13;
 
 Widget getRecipeButtons() {
   List<Widget> list = new List<Widget>();
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 1; i++) {
     list.add(recipeButton(i));
   }
   return new Column(children: list);
@@ -90,34 +90,6 @@ Container ratingSubSection(int i) {
     ),
   );
 }
-// Widget ratingSubSection = Container(
-//   child: Row(
-//     mainAxisSize: MainAxisSize.min,
-//     mainAxisAlignment: MainAxisAlignment.start,
-//     children: [
-//       Icon(
-//         Icons.star,
-//         color: Colors.red[500],
-//       ),
-//       Icon(
-//         Icons.star,
-//         color: Colors.red[500],
-//       ),
-//       Icon(
-//         Icons.star,
-//         color: Colors.red[500],
-//       ),
-//       Icon(
-//         Icons.star_half,
-//         color: Colors.red[500],
-//       ),
-//       Icon(
-//         Icons.star_border,
-//         color: Colors.red[500],
-//       ),
-//     ],
-//   ),
-// );
 
 Container imageRatingSection(String imageString, int i) {
   return Container(
@@ -146,20 +118,6 @@ Container timeSubSection(String time) {
   );
 }
 
-// Container difficultySubSection(String difficulty) {
-//   return Container(
-//     margin: EdgeInsets.all(5),
-//     child: Row(
-//       mainAxisSize: MainAxisSize.min,
-//       mainAxisAlignment: MainAxisAlignment.end,
-//       children: [
-//         boldBlackText('Difficulty: '),
-//         regularBlackText(difficulty),
-//       ],
-//     ),
-//   );
-// }
-
 Container titleSubSection(String title) {
   return Container(
     margin: EdgeInsets.only(top: 5, left: 5),  
@@ -180,7 +138,6 @@ Container titleTimeDifficultySecion(String title, String time/*, String difficul
         titleSubSection(title),
         SizedBox(height: 20,),
         timeSubSection(time),
-        // difficultySubSection(difficulty),
       ],
     ),
   );

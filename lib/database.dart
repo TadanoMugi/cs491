@@ -12,28 +12,8 @@ Database database;
 
 class DatabasePageView extends StatelessWidget {
   const DatabasePageView({Key key}) : super(key: key);
-
   @override 
   Widget build (BuildContext) {}
-  // @override
-  //   Widget build(BuildContext context) {
-  //    return MaterialApp(
-  //     home: Scaffold(
-  //       body: ListView(
-  //         children: [
-  //         new RaisedButton(
-  //            color: Colors.blue[100],
-  //           onPressed: () {
-  //             start();
-  //             Navigator.pushNamed(context, ResultPageRoute);
-  //           },
-  //         ),
-  //         ], 
-  //       ),
-  //     ),
-  //   );
-  // } // Widget build
-
 }
 
 Future<List<Recipe>> startDatabase() async
@@ -88,6 +68,7 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
    perfectMatchList = new List<Recipe>();
    try 
    {
+
       // Goes through all basket items each recipe (databaseTable holds every row as a linked list: ResultSet) 
       // Ingredient columns: 4 - 44    
       for (int index = 0; index < basket.length; index++) 
@@ -96,39 +77,47 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
         String ingredientSearchedUpperCased = ingredientSearched.substring(0, 1).toUpperCase() + ingredientSearched.substring(1, ingredientSearched.length);
         for(int j = 0; j < databaseTable.length; j++)
         {
+          // print ("dbTable length: " + databaseTable.length.toString());
           if (databaseTable[j].ingredients.contains(ingredientSearched) || 
               databaseTable[j].ingredients.contains(ingredientSearchedUpperCased) )
           {	
             perfectMatchList.add(databaseTable[j]);
-            //print(databaseTable[j].name);
+            print("dbTable: " + databaseTable[j].name);
           }
         }
       }
-    
+    print ("Search Works!!!");
     } catch (Exception)
     {
       print("Search: Didn't work ");
     }
-    print ("Search Works!!!");
-    // print (perfectMatchList[1].name);
+    
+    // print (perfectMatchList[0].name);
 }
 
 
 Future<List<Recipe>> retrieveData(database) async 
 {
   final List<Map<String, dynamic>> databaseTable = await database.rawQuery('SELECT * FROM recipetable');
-    Recipe recipe = new Recipe();
+    
     List<Recipe> recipeList = new List();
+    // String str = '';
 
-    for (int i = 0; i < databaseTable.length; i++)
+    for (int i = 0; i < databaseTable.length; i++) // i == 21 recipes inside db
     {
+      Recipe recipe = new Recipe();
       recipe.name = databaseTable[i]['_recipeName'];
+      // print ("recipeList Name: " + recipe.name);
       recipe.image = databaseTable[i]['_image'];
-      for (int j = 1; j < 40; j++)
+      // recipe.ingredients.add(String());
+      for (int j = 1; j < 40; j++) // 39 x 21 = 819 // j == 40 columns of ingredients
       {
-        recipe.ingredients.add(databaseTable[i]['_ingredients' + j.toString()]);
+        recipe.ingredients.add("");
+        recipe.ingredients[j-1] = (databaseTable[i]['_ingredient' + (j).toString()]);
+        print("ingredient: " + recipe.ingredients[j].toString());
+        // recipe.ingredients.add(databaseTable[i]['_ingredient' + (j).toString()]);
       }  
-      recipe.rating = databaseTable[i]['_rating'];
+      recipe.rating = databaseTable[i]['_rating'].toDouble();
       recipe.numReviews = databaseTable[i]['_numOfReviews'];
       recipe.url = databaseTable[i]['_url'];
       recipe.urlId = databaseTable[i]['_urlId'];
@@ -136,16 +125,20 @@ Future<List<Recipe>> retrieveData(database) async
       recipe.prepTime = databaseTable[i]['_prepTime'];
       recipe.cookingTime = databaseTable[i]['_cookingTime'];
       recipe.totalTime = databaseTable[i]['_totalTime'];
-      recipe.nutrition.calories = databaseTable[i]['_calories'];
-      recipe.nutrition.carbohydrates = databaseTable[i]['_carbohydrate'];
-      recipe.nutrition.cholesterol = databaseTable[i]['_cholesterol'];
-      recipe.nutrition.fat = databaseTable[i]['_fat'];
-      recipe.nutrition.sodium = databaseTable[i]['_sodium'];
-      recipe.nutrition.protein = databaseTable[i]['_protein'];
-      recipe.cuisine = databaseTable[i]["_cuisine"];
+      // recipe.nutrition.calories = databaseTable[i]['_calories'];
+      // recipe.nutrition.carbohydrates = databaseTable[i]['_carbohydrate'];
+      // recipe.nutrition.cholesterol = databaseTable[i]['_cholesterol'];
+      // recipe.nutrition.fat = databaseTable[i]['_fat'];
+      // recipe.nutrition.sodium = databaseTable[i]['_sodium'];
+      // recipe.nutrition.protein = databaseTable[i]['_protein'];
+      // recipe.cuisine = databaseTable[i]["_cuisine"];
 
       recipeList.add(recipe);
     }
+
+    // print("name: " + recipeList[0].name);
+    // print("ingredient: " + recipeList[0].ingredients[0].toString());
+
 
     return recipeList;    
 }

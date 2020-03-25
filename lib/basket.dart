@@ -52,7 +52,6 @@ Widget buildBasket(BuildContext context) {
                 Future<List<Recipe>> tableData = startDatabase();
                 searchDatabase(await tableData, basket);
                 Navigator.pushNamed(context, ResultPageRoute);
-              Navigator.pushNamed(context, ResultPageRoute);
             },
             textColor: Theme.of(context).primaryColor,
             child: const Text('Find me a recipe!'),

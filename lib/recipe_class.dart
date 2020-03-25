@@ -23,7 +23,7 @@ class Recipe
   {
       this.name = "";
       this.nutrition = null;
-      this.ingredients = new List();
+      this.ingredients = new List<String>();
       this.rating = 0;
       this.numReviews = 0;
       this.image = null;

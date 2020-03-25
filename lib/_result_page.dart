@@ -31,7 +31,7 @@ class ResultPageView extends StatelessWidget {
           },),
         body: ListView(
           children: [
-            getRecipeButtons()
+            // getRecipeButtons()
             // recipeButton(titleValue,imageOfRecipe,timeValue,difficultyValue),
             // _recipeButton('testing',testImage,'',''),
           ],
