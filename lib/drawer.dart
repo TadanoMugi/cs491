@@ -1,4 +1,7 @@
+import 'package:cs491/routing_constants.dart';
 import 'package:flutter/material.dart';
+
+import 'globals.dart';
 
 /* ==================================================
 // swipe from left to open 'drawer' for account info
@@ -27,29 +30,56 @@ class MyDrawer extends StatelessWidget {
 
         /*History*/
         ListTile(
-          title: Text('*History*'),
-          onTap: () {},
+          title: Container(
+            child: Row(
+              children: [
+                Icon(Icons.history),
+                Text('*History*'),
+              ])
+          ),
+          onTap: () {Navigator.pushNamed(context, HistoryPageRoute);},
         ),
         SizedBox(height: 10),
         
         /*Saved Recipes*/
         ListTile(
-          title: Text('*Saved Recipes*'),
-          onTap: () {},
+          title: Container(
+            child: Row(
+              children: [
+                Icon(Icons.favorite),
+                Text('*Favorites*'),
+              ])
+          ),
+          onTap: () {Navigator.pushNamed(context, FavoritesPageRoute);},
         ),
         SizedBox(height: 10),
 
         /*Preferences*/
         ListTile(
-          title: Text('*Preferences*'),
-          onTap: () {},
+          title: Container(
+            child: Row(
+              children: [
+                Icon(Icons.phonelink_setup),
+                Text('*Preferences*'),
+              ])
+          ),
+          onTap: () {Navigator.pushNamed(context, PreferencesPageRoute);},
         ),
         SizedBox(height: 150),
 
         /*Log out*/
         ListTile(
-          title: Text('*Log Out*'),
-          onTap: () {},
+          title: Container(
+            child: Row(
+              children: [
+                Icon(Icons.backspace),
+                Text('*Preferences*'),
+              ])
+          ),
+          onTap: () {
+            loggedIn = false;
+            Navigator.pop(context);
+          },
         )
       ],)
     );

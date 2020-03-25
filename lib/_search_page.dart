@@ -13,7 +13,7 @@ class SearchPageView extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Ingrediants'),
+      home: new MyHomePage(title: 'Ingredients'),
     );
   }
 }
