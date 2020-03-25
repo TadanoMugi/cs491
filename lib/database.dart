@@ -8,8 +8,6 @@ import 'recipe_class.dart';
 import 'globals.dart';
 
 Database database;
-
-
 class DatabasePageView extends StatelessWidget {
   const DatabasePageView({Key key}) : super(key: key);
   @override 
