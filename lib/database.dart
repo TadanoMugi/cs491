@@ -116,10 +116,6 @@ Future<List<Recipe>> retrieveData(database) async
       {
         recipe.ingredients.add("");
         recipe.ingredients[ingredientIndex] = (databaseTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
-<<<<<<< HEAD
-        // print("ingredient: " + recipe.ingredients[ingredientIndex].toString());
-=======
->>>>>>> 835e6b7c8e14b83f971132fde8f3b7aa9dc6d370
         // recipe.ingredients.add(databaseTable[i]['_ingredient' + (j).toString()]);
       }  
       recipe.rating = databaseTable[tableIndex]['_rating'].toDouble();
