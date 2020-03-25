@@ -6,7 +6,10 @@ double fontSizeValue = 13;
 
 Widget getRecipeButtons() {
   List<Widget> list = new List<Widget>();
+<<<<<<< HEAD
   // print("list length: " + perfectMatchList.length.toString());
+=======
+>>>>>>> 835e6b7c8e14b83f971132fde8f3b7aa9dc6d370
   for (int i = 0; i < perfectMatchList.length; i++) {
     list.add(recipeButton(i));
   }
@@ -154,6 +157,11 @@ FlatButton recipeButton(int i) {
           titleTimeDifficultySecion(
             perfectMatchList[i].name,
             perfectMatchList[i].totalTime, 
+            //perfectMatchList[i].numOfReviews,
+            //perfectMatchList[i].image
+            //perfectMatchList[i].url
+            // Make it look like a button
+            // Title should be at top rather than centered in the middle
           ),
           FavoriteWidget(),
         ],
