@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'database_helper.dart';
 import 'drawer.dart';
 import 'drawer_methods.dart';
 import 'result_page_methods.dart';
