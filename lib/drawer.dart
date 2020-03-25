@@ -1,6 +1,10 @@
-import 'package:cs491/routing_constants.dart';
 import 'package:flutter/material.dart';
 
+import '_home_page.dart';
+import '_user_favorites_page.dart';
+import '_user_history_page.dart';
+import '_user_preferences_page.dart';
+import 'routing_constants.dart';
 import 'globals.dart';
 
 /* ==================================================
@@ -21,7 +25,7 @@ class MyDrawer extends StatelessWidget {
             fit: BoxFit.none,
           ),
           SizedBox(height: 10),
-          Text('*username*')
+          Text('*username*', style: TextStyle(fontSize: 20),)
           ],))),
           
           SizedBox(height: 10),
@@ -29,59 +33,111 @@ class MyDrawer extends StatelessWidget {
           SizedBox(height: 10),
 
         /*History*/
-        ListTile(
-          title: Container(
-            child: Row(
-              children: [
-                Icon(Icons.history),
-                Text('*History*'),
-              ])
-          ),
-          onTap: () {Navigator.pushNamed(context, HistoryPageRoute);},
-        ),
-        SizedBox(height: 10),
+        Container(
+          height: 80,
+          child: Card(
+            color: Colors.grey[100],
+            margin: EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: ListTile(
+              title: Center(child: Container(
+                child: Row(
+                  children: [
+                    Icon(Icons.history, size: 40),
+                    SizedBox(width: 15),
+                    Text('*History*', style: TextStyle(fontSize: 20),),
+                  ])
+              )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return new HistoryPageView();
+                }));
+              },
+            ))),
         
-        /*Saved Recipes*/
-        ListTile(
-          title: Container(
-            child: Row(
-              children: [
-                Icon(Icons.favorite),
-                Text('*Favorites*'),
-              ])
-          ),
-          onTap: () {Navigator.pushNamed(context, FavoritesPageRoute);},
-        ),
-        SizedBox(height: 10),
+        /*Favorites*/
+        Container(
+          height: 80,
+          child: Card(
+            color: Colors.grey[100],
+            margin: EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: ListTile(
+              title: Center(child: Container(
+                child: Row(
+                  children: [
+                    Icon(Icons.favorite, size: 40),
+                    SizedBox(width: 15),
+                    Text('*Favorites*', style: TextStyle(fontSize: 20),),
+                  ])
+              )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return new FavoritesPageView();
+                }));
+              },
+            ))),
 
         /*Preferences*/
-        ListTile(
-          title: Container(
-            child: Row(
-              children: [
-                Icon(Icons.phonelink_setup),
-                Text('*Preferences*'),
-              ])
-          ),
-          onTap: () {Navigator.pushNamed(context, PreferencesPageRoute);},
-        ),
-        SizedBox(height: 150),
+        Container(
+          height: 80,
+          child: Card(
+            color: Colors.grey[100],
+            margin: EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: ListTile(
+              title: Center(child: Container(
+                child: Row(
+                  children: [
+                    Icon(Icons.phonelink_setup, size: 40),
+                    SizedBox(width: 15),
+                    Text('*Preferences*', style: TextStyle(fontSize: 20),),
+                  ])
+              )),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return new PreferencesPageView();
+                }));
+              },
+            ))),
+            SizedBox(height: 100),
 
         /*Log out*/
-        ListTile(
-          title: Container(
-            child: Row(
-              children: [
-                Icon(Icons.backspace),
-                Text('*Preferences*'),
-              ])
-          ),
-          onTap: () {
-            loggedIn = false;
-            Navigator.pop(context);
-          },
-        )
-      ],)
-    );
+        Container(
+          height: 80,
+          child: Card(
+            color: Colors.grey[100],
+            margin: EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: ListTile(
+              title: Center(child: Container(
+                child: Row(
+                  children: [
+                    Icon(Icons.backspace, size: 40),
+                    SizedBox(width: 15),
+                    Text('*Log Out*', style: TextStyle(fontSize: 20),),
+                  ])
+              )),
+              onTap: () {
+                loggedIn = false;
+                Navigator.pop(context);
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return new HomePageView();
+                }));
+              },
+            ))),
+       
+    ]));
   }
 }

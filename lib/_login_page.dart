@@ -55,7 +55,6 @@ class LoginPageView extends StatelessWidget {
                 simpleButton('Create Account',RegisterPageRoute),
                 SizedBox(width: 120),
                 Container(
-                  // padding: const EdgeInsets.only(right: 20),
                   child: RaisedButton(
                     child: Text('Next',),
                     onPressed: () {
@@ -66,7 +65,13 @@ class LoginPageView extends StatelessWidget {
                 )
               ],),)
            ],
-         )
+         ),
+         floatingActionButton: FloatingActionButton(
+          elevation: 10.0,
+          child: Icon(Icons.keyboard_backspace),
+          onPressed: () {
+            Navigator.pop(context);
+          },),
       )
     );
   }
