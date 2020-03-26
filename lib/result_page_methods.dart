@@ -121,14 +121,28 @@ Container timeSubSection(String time) {
 
 Container titleSubSection(String title) {
   return Container(
-    margin: EdgeInsets.only(top: 5, left: 5),  
+    margin: EdgeInsets.only(top: 0, left: 5),  
     constraints: new BoxConstraints(
       maxWidth: tempWidth),
       child: titleText(title),
   );
 }
 
-Container titleTimeDifficultySecion(String title, String time/*, String difficulty*/) {
+Container numOfReviewsSubSection(int numOfReviews) {
+  return Container(
+    margin: EdgeInsets.all(5),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        boldBlackText('Number of Reviews: '),
+        regularBlackText(numOfReviews.toString()),
+      ],
+    ),
+  );
+}
+
+Container titleTimeDifficultySecion(String title, String time, int numOfReviews) {
   return Container(
     margin: EdgeInsets.all(5),
     child: Column(
@@ -139,22 +153,23 @@ Container titleTimeDifficultySecion(String title, String time/*, String difficul
         titleSubSection(title),
         SizedBox(height: 20,),
         timeSubSection(time),
+        numOfReviewsSubSection(numOfReviews)
       ],
     ),
   );
 }
 
-FlatButton recipeButton(int i) {
-    return FlatButton(
+RaisedButton recipeButton(int i) {
+    return RaisedButton(
       color: Colors.grey[100],
       padding: EdgeInsets.only(top: 5, bottom: 5),
       child: Row(
         children: [
-          imageRatingSection(perfectMatchList[i].image, i),
+          imageRatingSection(/*perfectMatchList[i].image*/tempurl, i),
           titleTimeDifficultySecion(
             perfectMatchList[i].name,
             perfectMatchList[i].totalTime, 
-            //perfectMatchList[i].numOfReviews,
+            perfectMatchList[i].numReviews,
             // Make it look like a button
             // Title should be at top rather than centered in the middle
           ),
