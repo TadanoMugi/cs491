@@ -18,7 +18,8 @@ Future<List<Recipe>> startDatabase() async
 {
   WidgetsFlutterBinding.ensureInitialized();
   var databasesPath = await getDatabasesPath(); 
-  String path = join(databasesPath, 'RFDB_working.db');
+  String path = join(databasesPath, 'database.db'); // change 'database.db' whenever database is updated with more entries
+  // "/data/user/0/com.example.cs491/databases/RFDB_working.db" is a Root folder and is unaccessible
 
   // Check if the database exists
   var exists = await databaseExists(path);
@@ -60,7 +61,6 @@ Future<List<Recipe>> startDatabase() async
   return list;
 } 
 
-//  NO RETURNS;     THIS NEEDS TO DEFINE A GLOBAL EACH TIME ITS CALLED TO RESET IT  ////
 void searchDatabase(List<Recipe> databaseTable, List<String> basket)
 {
    perfectMatchList = new List<Recipe>();
@@ -70,9 +70,7 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
       // Ingredient columns: 4 - 44    
       for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
       {
-        String ingredientSearched = basket.elementAt(basketIndex).toLowerCase(); // Basket ingredient -> lower case
-       // String ingredientSearchedUpperCased = ingredientSearched.substring(0, 1).toUpperCase() + ingredientSearched.substring(1, ingredientSearched.length);
-        
+        String ingredientSearched = basket.elementAt(basketIndex).toLowerCase(); // Basket ingredient -> lower case        
         for(int tableIndex = 0; tableIndex < databaseTable.length; tableIndex++)
         {
           for (int ingredientListIndex = 0; ingredientListIndex < 40; ingredientListIndex++)
@@ -99,15 +97,13 @@ Future<List<Recipe>> retrieveData(database) async
   final List<Map<String, dynamic>> databaseTable = await database.rawQuery('SELECT * FROM recipetable');
     
     List<Recipe> recipeList = new List();
-    // String str = '';
+    print("DEBUG: " + databaseTable.length.toString());
 
     for (int tableIndex = 0; tableIndex < databaseTable.length; tableIndex++) // i == 21 recipes inside db
     {
       Recipe recipe = new Recipe();
       recipe.name = databaseTable[tableIndex]['_recipeName'];
-      // print ("recipeList Name: " + recipe.name);
       recipe.image = databaseTable[tableIndex]['_image'];
-      // recipe.ingredients.add(String());
 
       // Recipe.Ingredients list: 0->39
       // tableIndex: 0->database.length
@@ -116,7 +112,6 @@ Future<List<Recipe>> retrieveData(database) async
       {
         recipe.ingredients.add("");
         recipe.ingredients[ingredientIndex] = (databaseTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
-        // recipe.ingredients.add(databaseTable[i]['_ingredient' + (j).toString()]);
       }  
       recipe.rating = databaseTable[tableIndex]['_rating'].toDouble();
       recipe.numReviews = databaseTable[tableIndex]['_numOfReviews'];
@@ -140,12 +135,6 @@ Future<List<Recipe>> retrieveData(database) async
 
       recipeList.add(recipe);
     }
-
-    // print("name: " + recipeList[0].name);
-    // print("ingredient: " + recipeList[0].ingredients[0].toString());
- 
- 
-
     return recipeList;    
 }
   
