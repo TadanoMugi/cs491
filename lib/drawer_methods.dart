@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'drawer_login.dart';
-import 'globals.dart';
+// import 'globals.dart';
 import 'drawer.dart';
+import 'single_loggedIn.dart';
 
 Container getDrawer() {
-  if (loggedIn) {
+  var s = singletonLoggedIn;
+  if (s.loggedIn) {
     return Container(
       child: MyDrawer()
     );

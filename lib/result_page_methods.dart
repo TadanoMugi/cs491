@@ -150,20 +150,18 @@ FlatButton recipeButton(int i) {
       padding: EdgeInsets.only(top: 5, bottom: 5),
       child: Row(
         children: [
-          imageRatingSection(/*perfectMatchList[i].image*/tempurl, i),
+          imageRatingSection(perfectMatchList[i].image, i),
           titleTimeDifficultySecion(
             perfectMatchList[i].name,
             perfectMatchList[i].totalTime, 
             //perfectMatchList[i].numOfReviews,
-            //perfectMatchList[i].image
-            //perfectMatchList[i].url
             // Make it look like a button
             // Title should be at top rather than centered in the middle
           ),
           FavoriteWidget(),
         ],
       ),
-      onPressed: null,
+      onPressed: null, //perfectMatchList[i].url
   );
 
 } // Container recipeButton

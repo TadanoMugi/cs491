@@ -8,7 +8,7 @@ class Recipe
   // new
   List<String> ingredients;
   Nutrition nutrition;
-  ByteBuffer image;
+  String image;
   double rating;
   int numReviews;
   String url;

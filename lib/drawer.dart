@@ -1,3 +1,6 @@
+
+
+import 'package:cs491/main.dart';
 import 'package:flutter/material.dart';
 
 import '_home_page.dart';
@@ -6,6 +9,7 @@ import '_user_history_page.dart';
 import '_user_preferences_page.dart';
 import 'routing_constants.dart';
 import 'globals.dart';
+import 'single_loggedIn.dart';
 
 /* ==================================================
 // swipe from left to open 'drawer' for account info
@@ -14,6 +18,7 @@ import 'globals.dart';
 class MyDrawer extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
+    var s = singletonLoggedIn;
     return Drawer(
       child: ListView(padding: const EdgeInsets.only(top: 40),children: <Widget>[
 
@@ -128,12 +133,13 @@ class MyDrawer extends StatelessWidget {
                   ])
               )),
               onTap: () {
-                loggedIn = false;
+                s.loggedIn = false;
                 Navigator.pop(context);
+                // (context as Element).reassemble();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return new HomePageView();
+                      return new MyApp();
                 }));
               },
             ))),
