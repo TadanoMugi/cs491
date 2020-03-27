@@ -144,7 +144,7 @@ Container numOfReviewsSubSection(int numOfReviews) {
 
 Container titleTimeDifficultySecion(String title, String time, int numOfReviews) {
   return Container(
-    margin: EdgeInsets.all(5),
+    margin: EdgeInsets.only(bottom: 5, left: 5, right: 5),
     child: Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -159,8 +159,12 @@ Container titleTimeDifficultySecion(String title, String time, int numOfReviews)
   );
 }
 
-RaisedButton recipeButton(int i) {
-    return RaisedButton(
+FlatButton recipeButton(int i) {
+    return FlatButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: BorderSide(color: Colors.black26)
+      ),
       color: Colors.grey[100],
       padding: EdgeInsets.only(top: 5, bottom: 5),
       child: Row(
