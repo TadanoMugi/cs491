@@ -121,28 +121,14 @@ Container timeSubSection(String time) {
 
 Container titleSubSection(String title) {
   return Container(
-    margin: EdgeInsets.only(top: 0, left: 5),  
+    margin: EdgeInsets.only(top: 5, left: 5),  
     constraints: new BoxConstraints(
       maxWidth: tempWidth),
       child: titleText(title),
   );
 }
 
-Container numOfReviewsSubSection(int numOfReviews) {
-  return Container(
-    margin: EdgeInsets.all(5),
-    child: Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        boldBlackText('Number of Reviews: '),
-        regularBlackText(numOfReviews.toString()),
-      ],
-    ),
-  );
-}
-
-Container titleTimeDifficultySecion(String title, String time, int numOfReviews) {
+Container titleTimeDifficultySecion(String title, String time/*, String difficulty*/) {
   return Container(
     margin: EdgeInsets.only(bottom: 5, left: 5, right: 5),
     child: Column(
@@ -153,7 +139,6 @@ Container titleTimeDifficultySecion(String title, String time, int numOfReviews)
         titleSubSection(title),
         SizedBox(height: 20,),
         timeSubSection(time),
-        numOfReviewsSubSection(numOfReviews)
       ],
     ),
   );
@@ -161,19 +146,15 @@ Container titleTimeDifficultySecion(String title, String time, int numOfReviews)
 
 FlatButton recipeButton(int i) {
     return FlatButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-        side: BorderSide(color: Colors.black26)
-      ),
       color: Colors.grey[100],
       padding: EdgeInsets.only(top: 5, bottom: 5),
       child: Row(
         children: [
-          imageRatingSection(/*perfectMatchList[i].image*/tempurl, i),
+          imageRatingSection(perfectMatchList[i].image, i),
           titleTimeDifficultySecion(
             perfectMatchList[i].name,
             perfectMatchList[i].totalTime, 
-            perfectMatchList[i].numReviews,
+            //perfectMatchList[i].numOfReviews,
             // Make it look like a button
             // Title should be at top rather than centered in the middle
           ),
