@@ -66,6 +66,7 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
    perfectMatchList = new List<Recipe>();
    try 
    {
+     print("DEBUG: Basket length: " + basket.length.toString());
       // Goes through all basket items each recipe (databaseTable holds every row as a linked list: ResultSet) 
       // Ingredient columns: 4 - 44    
       for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
@@ -83,7 +84,7 @@ void searchDatabase(List<Recipe> databaseTable, List<String> basket)
           }
         }
       }
-    print ("Search Works!!!");
+    print ("Search Works!!!" + perfectMatchList.length.toString());
     } catch (Exception)
     {
       print("Search: Didn't work ");

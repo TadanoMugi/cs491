@@ -146,6 +146,10 @@ Container titleTimeDifficultySecion(String title, String time/*, String difficul
 
 FlatButton recipeButton(int i) {
     return FlatButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: BorderSide(color: Colors.black38)
+      ),
       color: Colors.grey[100],
       padding: EdgeInsets.only(top: 5, bottom: 5),
       child: Row(
