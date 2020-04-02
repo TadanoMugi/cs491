@@ -1,3 +1,4 @@
+import 'package:cs491/globals.dart';
 import 'package:flutter/material.dart';
 import 'routing_constants.dart';
 import 'recipe_class.dart';
@@ -48,9 +49,11 @@ Widget buildBasket(BuildContext context) {
           new SizedBox(width: 20,),
           new RaisedButton(
             color: Colors.grey[100],
-            onPressed: () async {
-                Future<List<Recipe>> tableData = startDatabase();
-                searchDatabase(await tableData, basket);
+            onPressed: ()  async  {
+                //Future<List<Recipe>> copyOfRecipeDatabase = startDatabase();
+                //searchDatabase(await copyOfRecipeDatabase, basket);
+                await startDatabase();
+                searchDatabase(recipeTable, basket);
                 Navigator.pushNamed(context, ResultPageRoute);
             },
             textColor: Theme.of(context).primaryColor,

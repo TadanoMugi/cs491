@@ -1,6 +1,9 @@
-  final List<String> letters = [
+  final List<String> letters = ['baking powder',
 'egg',
-'onion',
+'all-purpose flour',
+'raisins',
+'milk',
+'white sugar',
 'sugar',
 'chicken',
 
