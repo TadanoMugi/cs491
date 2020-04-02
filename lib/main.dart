@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     /*Initialize singleton loggedIn at startup*/
     // var s = singletonLoggedIn;
     // s.loggedIn = true;
+    
 
     return MaterialApp(
       title: 'cs491 Recipe Finder',

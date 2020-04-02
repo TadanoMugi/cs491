@@ -2,12 +2,20 @@ import 'package:cs491/drawer_methods.dart';
 import 'package:cs491/routing_constants.dart';
 import 'package:flutter/material.dart';
 
+import 'database.dart';
 import 'drawer.dart';
 
 class HomePageView extends StatelessWidget {
   
+  Future<void> _startDatabase() async {
+    await startDatabase();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    _startDatabase();
+    
     Color color = Theme.of(context).primaryColor;
 
 /* ==================================================

@@ -1,3 +1,4 @@
+import 'package:cs491/routing_constants.dart';
 import 'package:flutter/material.dart';
 
 import 'drawer_methods.dart';
@@ -107,16 +108,31 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 10.0,
-        child: Icon(Icons.shopping_basket),
-        onPressed: (){
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => buildBasket(context),
-          );
-        },
-      ),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+        FloatingActionButton(
+          heroTag: null,
+          elevation: 10.0,
+          child: Icon(Icons.shopping_basket),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => buildBasket(context),
+              );
+          }
+        ),
+        SizedBox(height: 5),
+        FloatingActionButton(
+          heroTag: null,
+          elevation: 10.0,
+          child: Icon(Icons.keyboard_backspace),
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },),
+
+      ],)
     );
   }
 }
