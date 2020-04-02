@@ -16,80 +16,86 @@ class DatabasePageView extends StatelessWidget {
 
 Future<List<Recipe>> startDatabase() async
 {
-  WidgetsFlutterBinding.ensureInitialized();
-  var databasesPath = await getDatabasesPath(); 
-  String path = join(databasesPath, 'database.db'); // change 'database.db' whenever database is updated with more entries
-  // "/data/user/0/com.example.cs491/databases/RFDB_working.db" is a Root folder and is unaccessible
 
-  // Check if the database exists
-  var exists = await databaseExists(path);
+    WidgetsFlutterBinding.ensureInitialized();
+    var databasesPath = await getDatabasesPath(); 
+    String path = join(databasesPath, 'database.db'); // change 'database.db' whenever database is updated with more entries
+    // "/data/user/0/com.example.cs491/databases/RFDB_working.db" is a Root folder and is unaccessible
 
-  if (!exists) {
-  // Should happen only the first time you launch your application
-    print("Creating new copy from asset");
+    // Check if the database exists
+    var exists = await databaseExists(path);
 
-    //Make sure the parent directory exists
-    try {
-      await Directory(dirname(path)).create(recursive: true);
-    } catch (Exception) {
+    if (!exists) {
+    // Should happen only the first time you launch your application
+      print("Creating new copy from asset");
+
+      //Make sure the parent directory exists
+      try {
+        await Directory(dirname(path)).create(recursive: true);
+      } catch (Exception) {
+        print(Exception);
+      }
+        
+      //Copy from asset
+      ByteData data = await rootBundle.load(join("assets/RFDB.db"));
+      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      
+      //Write and flush the bytes written
+      await File(path).writeAsBytes(bytes, flush: true);
+
+    } else {
+      print("Opening existing database");
+    }
+    // Open the database
+    database = await openDatabase(path, readOnly: true);
+    
+    print (database.isOpen);
+    List<Recipe> list = new List();
+    try
+    {
+      list = await retrieveData(database);
+    }catch (Exception)
+    {
       print(Exception);
     }
-      
-    //Copy from asset
-    ByteData data = await rootBundle.load(join("assets/RFDB.db"));
-    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    
-    //Write and flush the bytes written
-    await File(path).writeAsBytes(bytes, flush: true);
 
-  } else {
-    print("Opening existing database");
-  }
-  // Open the database
-  database = await openDatabase(path, readOnly: true);
+    return list;
   
-  print (database.isOpen);
-  List<Recipe> list = new List();
-  try
-  {
-    list = await retrieveData(database);
-  }catch (Exception)
-  {
-    print(Exception);
-  }
-
-  return list;
 } 
 
-void searchDatabase(List<Recipe> databaseTable, List<String> basket)
-{
-   perfectMatchList = new List<Recipe>();
-   try 
-   {
-      // Goes through all basket items each recipe (databaseTable holds every row as a linked list: ResultSet) 
-      // Ingredient columns: 4 - 44    
-      for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
-      {
-        String ingredientSearched = basket.elementAt(basketIndex).toLowerCase(); // Basket ingredient -> lower case        
-        for(int tableIndex = 0; tableIndex < databaseTable.length; tableIndex++)
-        {
-          for (int ingredientListIndex = 0; ingredientListIndex < 40; ingredientListIndex++)
-          {
-            String databaseTableIngredient = databaseTable[tableIndex].ingredients[ingredientListIndex].toLowerCase();
-            if (databaseTableIngredient.contains(ingredientSearched))
-            {	
-              perfectMatchList.add(databaseTable[tableIndex]);
-            }
-          }
-        }
-      }
-    print ("Search Works!!!");
-    } catch (Exception)
-    {
-      print("Search: Didn't work ");
-    }
-    
-}
+// void searchDatabase(List<Recipe> recipeList, List<String> basket)
+// {
+//    perfectMatchList = new List<Recipe>();
+//    int boolCounter = 0;
+//    try 
+//    {
+//       // Goes through all basket items each recipe (databaseTable holds every row as a linked list: ResultSet) 
+//       // Ingredient columns: 4 - 44    
+//       for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
+//       {
+//         String ingredientSearched = basket.elementAt(basketIndex).toLowerCase(); // Basket ingredient -> lower case        
+//         for(int tableIndex = 0; tableIndex < recipeList.length; tableIndex++)
+//         {
+//           for (int ingredientListIndex = 0; ingredientListIndex < 40; ingredientListIndex++)
+//           {
+//             String recipeListIngredient = recipeList[tableIndex].ingredients[ingredientListIndex].toLowerCase();
+//             if (recipeListIngredient.contains(ingredientSearched))
+//             {	
+//               boolCounter++;
+//             }
+//           }
+//           if (boolCounter == basket.length)
+//           {
+//             perfectMatchList.add(recipeList[tableIndex]);
+//           }
+//         } // recipeList loop
+//       } // basket loop
+//     print ("Search Works!!!");
+//     } catch (Exception)
+//     {
+//       print("Search: Didn't work ");
+//     }    
+// }
 
 
 Future<List<Recipe>> retrieveData(database) async 
@@ -137,4 +143,45 @@ Future<List<Recipe>> retrieveData(database) async
     }
     return recipeList;    
 }
-  
+
+// Output: recipes that include one or more basket ingredient  
+void searchDatabase(List<Recipe> recipeList, List<String> basket)
+{
+  perfectMatchList = new List<Recipe>();
+
+   try 
+   {
+      // Goes through the entire database once for all basket items
+      for(int tableIndex = 0; tableIndex < recipeList.length; tableIndex++)
+      {
+        //bool perfectMatchCheck = true; 
+        int boolCounter = 0;
+        for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
+        {
+            // Basket ingredient -> lower case
+            String ingredientSearched = basket.elementAt(basketIndex).toLowerCase();        
+            for (int ingredientListIndex = 0; ingredientListIndex < 40; ingredientListIndex++)
+            {
+              String recipeListIngredient = recipeList[tableIndex].ingredients[ingredientListIndex].toLowerCase();
+              if (recipeListIngredient == "")
+              {
+                // Stops checking the rest of a recipe's ingredient list and moves on to the next basket item
+                break;
+              }
+              if (recipeListIngredient.contains(ingredientSearched))
+              {	
+                boolCounter++;
+              }
+            }
+         }
+         if (boolCounter == basket.length)
+         {
+           perfectMatchList.add(recipeList[tableIndex]);
+         }
+      } // Table
+      print ("Search Works!!!");
+    } catch (Exception)
+    {
+      print("Search: Didn't work ");
+    }    
+}
