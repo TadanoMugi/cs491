@@ -1,6 +1,8 @@
 import 'recipe_class.dart';
+import 'user_class.dart';
 
-List<Recipe> databaseTable;   // Database copy
+List<Recipe> recipeTable;   // Database copy of Recipes
+List<User> userTable;       // Database copy of Users
 List<Recipe> perfectMatchList; // Results list: exact matches
 // bool loggedIn = true;
 
