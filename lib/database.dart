@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'recipe_class.dart';
+import 'user_class.dart';
 import 'globals.dart';
 
 Database database;
@@ -14,9 +15,8 @@ class DatabasePageView extends StatelessWidget {
   Widget build (BuildContext) {}
 }
 
-Future<List<Recipe>> startDatabase() async
+/*Future<List<Recipe>>*/ void startDatabase() async
 {
-
     WidgetsFlutterBinding.ensureInitialized();
     var databasesPath = await getDatabasesPath(); 
     String path = join(databasesPath, 'database.db'); // change 'database.db' whenever database is updated with more entries
@@ -50,17 +50,17 @@ Future<List<Recipe>> startDatabase() async
     database = await openDatabase(path, readOnly: true);
     
     print (database.isOpen);
-    List<Recipe> list = new List();
+    //List<Recipe> recipeList = new List();
     try
     {
-      list = await retrieveData(database);
+       recipeTable = await retrieveRecipeTable(database);
+       userTable = await retrieveUserTable(database);
     }catch (Exception)
     {
       print(Exception);
     }
 
-    return list;
-  
+    //return list;
 } 
 
 // void searchDatabase(List<Recipe> recipeList, List<String> basket)
@@ -97,19 +97,33 @@ Future<List<Recipe>> startDatabase() async
 //     }    
 // }
 
-
-Future<List<Recipe>> retrieveData(database) async 
+Future<List<User>> retrieveUserTable(database) async 
 {
-  final List<Map<String, dynamic>> databaseTable = await database.rawQuery('SELECT * FROM recipetable');
+  final List<Map<String, dynamic>> userTable = await database.rawQuery('SELECT * FROM usertable');
+  List<User> userList = new List();
+
+  for (int tableIndex = 0; tableIndex < userTable.length; tableIndex++)
+  {
+    User user = new User();
+    user.userEmail = userTable[tableIndex]['_email'];
+    user.userPassword = userTable[tableIndex]['_password'];
+  }  
+
+  return userList;
+}
+
+Future<List<Recipe>> retrieveRecipeTable(database) async 
+{
+  final List<Map<String, dynamic>> recipeTable = await database.rawQuery('SELECT * FROM recipetable');
     
     List<Recipe> recipeList = new List();
-    print("DEBUG: " + databaseTable.length.toString());
+    print("DEBUG: " + recipeTable.length.toString());
 
-    for (int tableIndex = 0; tableIndex < databaseTable.length; tableIndex++) // i == 21 recipes inside db
+    for (int tableIndex = 0; tableIndex < recipeTable.length; tableIndex++) // i == 21 recipes inside db
     {
       Recipe recipe = new Recipe();
-      recipe.name = databaseTable[tableIndex]['_recipeName'];
-      recipe.image = databaseTable[tableIndex]['_image'];
+      recipe.name = recipeTable[tableIndex]['_recipeName'];
+      recipe.image = recipeTable[tableIndex]['_image'];
 
       // Recipe.Ingredients list: 0->39
       // tableIndex: 0->database.length
@@ -117,27 +131,27 @@ Future<List<Recipe>> retrieveData(database) async
       for (int ingredientIndex = 0, stringIndex = 1; ingredientIndex < 40; ingredientIndex++, stringIndex++) // 39 x 21 = 819 // j == 40 columns of ingredients
       {
         recipe.ingredients.add("");
-        recipe.ingredients[ingredientIndex] = (databaseTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
+        recipe.ingredients[ingredientIndex] = (recipeTable[tableIndex]['_ingredient' + (stringIndex).toString()]);
       }  
-      recipe.rating = databaseTable[tableIndex]['_rating'].toDouble();
-      recipe.numReviews = databaseTable[tableIndex]['_numOfReviews'];
-      recipe.url = databaseTable[tableIndex]['_url'];
-      recipe.urlId = databaseTable[tableIndex]['_urlId'];
-      recipe.source = databaseTable[tableIndex]['_source'];
-      String tempPrepTime = databaseTable[tableIndex]['_prepTime'];
+      recipe.rating = recipeTable[tableIndex]['_rating'].toDouble();
+      recipe.numReviews = recipeTable[tableIndex]['_numOfReviews'];
+      recipe.url = recipeTable[tableIndex]['_url'];
+      recipe.urlId = recipeTable[tableIndex]['_urlId'];
+      recipe.source = recipeTable[tableIndex]['_source'];
+      String tempPrepTime = recipeTable[tableIndex]['_prepTime'];
       recipe.prepTime = tempPrepTime.toLowerCase().trim();
-      String tempCookingTime = databaseTable[tableIndex]['_cookingTime'];
+      String tempCookingTime = recipeTable[tableIndex]['_cookingTime'];
       recipe.cookingTime = tempCookingTime.toLowerCase().replaceAll(" : ", "").trim();
-      String tempTotalTime = databaseTable[tableIndex]['_totalTime'];
+      String tempTotalTime = recipeTable[tableIndex]['_totalTime'];
       recipe.totalTime = tempTotalTime.toLowerCase().replaceAll("ready in ", "").trim();
  
-      // recipe.nutrition.calories = databaseTable[tableIndex]['_calories'];
-      // recipe.nutrition.carbohydrates = databaseTable[tableIndex]['_carbohydrate'];
-      // recipe.nutrition.cholesterol = databaseTable[tableIndex]['_cholesterol'];
-      // recipe.nutrition.fat = databaseTable[tableIndex]['_fat'];
-      // recipe.nutrition.sodium = databaseTable[tableIndex]['_sodium'];
-      // recipe.nutrition.protein = databaseTable[tableIndex]['_protein'];
-      // recipe.cuisine = databaseTable[tableIndex]["_cuisine"];
+      // recipe.nutrition.calories = recipeTable[tableIndex]['_calories'];
+      // recipe.nutrition.carbohydrates = recipeTable[tableIndex]['_carbohydrate'];
+      // recipe.nutrition.cholesterol = recipeTable[tableIndex]['_cholesterol'];
+      // recipe.nutrition.fat = recipeTable[tableIndex]['_fat'];
+      // recipe.nutrition.sodium = recipeTable[tableIndex]['_sodium'];
+      // recipe.nutrition.protein = recipeTable[tableIndex]['_protein'];
+      // recipe.cuisine = recipeTable[tableIndex]["_cuisine"];
 
       recipeList.add(recipe);
     }
