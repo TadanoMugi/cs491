@@ -15,7 +15,7 @@ class DatabasePageView extends StatelessWidget {
   Widget build (BuildContext) {}
 }
 
-/*Future<List<Recipe>>*/ void startDatabase() async
+/*Future<List<Recipe>>*/ Future startDatabase() async
 {
     WidgetsFlutterBinding.ensureInitialized();
     var databasesPath = await getDatabasesPath(); 
@@ -117,7 +117,6 @@ Future<List<Recipe>> retrieveRecipeTable(database) async
   final List<Map<String, dynamic>> recipeTable = await database.rawQuery('SELECT * FROM recipetable');
     
     List<Recipe> recipeList = new List();
-    print("DEBUG: " + recipeTable.length.toString());
 
     for (int tableIndex = 0; tableIndex < recipeTable.length; tableIndex++) // i == 21 recipes inside db
     {

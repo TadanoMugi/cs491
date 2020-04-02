@@ -49,9 +49,10 @@ Widget buildBasket(BuildContext context) {
           new SizedBox(width: 20,),
           new RaisedButton(
             color: Colors.grey[100],
-            onPressed: () async {
+            onPressed: ()  async  {
                 //Future<List<Recipe>> copyOfRecipeDatabase = startDatabase();
                 //searchDatabase(await copyOfRecipeDatabase, basket);
+                await startDatabase();
                 searchDatabase(recipeTable, basket);
                 Navigator.pushNamed(context, ResultPageRoute);
             },
