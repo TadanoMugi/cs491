@@ -8,6 +8,25 @@ import 'database.dart';
 List<String> basket = []; 
 
 Widget buildBasket(BuildContext context) {
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("ERROR"),
+          content: new Text("Basket is empty"),
+          actions: <Widget>[
+            new RaisedButton(
+              child: new Text("close"),
+              onPressed: () {Navigator.of(context).pop();},
+            )
+          ],
+        );
+      }
+    );
+  }
+
   return new AlertDialog(
     title: const Text(
       'Basket',
@@ -53,9 +72,13 @@ Widget buildBasket(BuildContext context) {
                 //Future<List<Recipe>> copyOfRecipeDatabase = startDatabase();
                 //searchDatabase(await copyOfRecipeDatabase, basket);
                 // await startDatabase();
-                
-                searchDatabase(recipeTable, basket);
-                Navigator.pushNamed(context, ResultPageRoute);
+                if(basket.length == 0) {
+                  _showDialog();
+                }
+                else {
+                  searchDatabase(recipeTable, basket);
+                  Navigator.pushNamed(context, ResultPageRoute);
+                }
             },
             textColor: Theme.of(context).primaryColor,
             child: const Text('Find me a recipe!'),
