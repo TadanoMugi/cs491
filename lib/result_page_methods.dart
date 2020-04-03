@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '_result_page.dart';
 import 'globals.dart';
 
@@ -112,8 +113,8 @@ Container timeSubSection(String time) {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        boldBlackText('Time: '),
-        regularBlackText(time),
+        boldBlackText('Total Time: '),
+        (time == "null") ? regularBlackText('not specified') : regularBlackText(time)
       ],
     ),
   );
@@ -128,7 +129,35 @@ Container titleSubSection(String title) {
   );
 }
 
-Container titleTimeDifficultySecion(String title, String time/*, String difficulty*/) {
+Container sourceSubSection() {
+  return Container(
+    margin: EdgeInsets.all(5),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        boldBlackText('Source: '),
+        regularBlackText('allrecipes.com'),
+      ],
+    )
+  );
+}
+
+Container reviewSubSection(int numReviews) {
+  return Container(
+    margin: EdgeInsets.all(5),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        boldBlackText('Number of Reviews: '),
+        regularBlackText(numReviews.toString())
+      ],
+    )
+  );
+}
+
+Container titleTimeReviewSecion(String title, String time, int numReviews) {
   return Container(
     margin: EdgeInsets.only(bottom: 5, left: 5, right: 5),
     child: Column(
@@ -139,6 +168,8 @@ Container titleTimeDifficultySecion(String title, String time/*, String difficul
         titleSubSection(title),
         SizedBox(height: 20,),
         timeSubSection(time),
+        sourceSubSection(),
+        reviewSubSection(numReviews)
       ],
     ),
   );
@@ -155,17 +186,19 @@ FlatButton recipeButton(int i) {
       child: Row(
         children: [
           imageRatingSection(perfectMatchList[i].image, i),
-          titleTimeDifficultySecion(
+          titleTimeReviewSecion(
             perfectMatchList[i].name,
             perfectMatchList[i].totalTime, 
-            //perfectMatchList[i].numOfReviews,
+            perfectMatchList[i].numReviews,
             // Make it look like a button
             // Title should be at top rather than centered in the middle
           ),
           FavoriteWidget(),
         ],
       ),
-      onPressed: null, //perfectMatchList[i].url
+      onPressed: () {
+        _launchURL(perfectMatchList[i].url);
+      }
   );
 
 } // Container recipeButton
@@ -209,4 +242,12 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
     });
   }
 
+}
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }

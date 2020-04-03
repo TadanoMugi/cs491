@@ -8,7 +8,7 @@
 'chicken',
 
 'milk',
-
+'chocolate',
 'salt',
 'raisins',
 'corn starch',
@@ -2628,7 +2628,7 @@
 'lemon pepper',
 'tri-tip steak',
 'escargot',
-'chocolate',
+
 'chaat masala',
 'kaiser rolls',
 'sandwiches',
