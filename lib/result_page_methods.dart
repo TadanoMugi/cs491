@@ -2,21 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '_result_page.dart';
 import 'globals.dart';
+import 'routing_constants.dart';
+import 'sorting_methods.dart';
 
 double fontSizeValue = 13;
 
-RaisedButton sortButton(IconData icon, String sortName, bool ascending) {
+void boolModifier(String sortName, bool ascending) {
+  print("boolMod start");
+  switch (sortName) {
+    case "Ratings":
+      if (ratingAscending == true) 
+        ratingAscending = false;
+      else ratingAscending = true;
+      print("ratingAscending: " + ratingAscending.toString());
+      break;
+    case "Time":
+      if (timeAscending == true) 
+        timeAscending = false;
+      else timeAscending = true;
+      break;
+    case "Alphabetical":
+      if (alphabeticalAscending == true) 
+        alphabeticalAscending = false;
+      else alphabeticalAscending = true;
+      break;
+    default: print("DEBUG: switch boolModifier default"); break;
+  }
+}
+
+void sortPerfectMatchList(String sortName, bool ascending) {
+  switch (sortName) { 
+    case "Ratings":
+      if (ascending) HighestRating(perfectMatchList);
+      else LowestRating(perfectMatchList);
+      break;
+    case "Time":
+      if (ascending) TotalTimeAscending(perfectMatchList);
+      else TotalTimeDescending(perfectMatchList);
+      break;
+    case "Alphabetical":
+      if (ascending) AlphabeticalAscending(perfectMatchList);
+      else AlphabeticalDescending(perfectMatchList);
+      break;
+    default: print("DEBUG: switch sortPerfectMatchList default"); break;
+  }
+}
+
+RaisedButton sortButton(IconData icon, String sortName, bool ascending, BuildContext context) {
   return RaisedButton(
     color: Colors.grey[100],
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        (ascending) ? Icon(Icons.arrow_downward) : Icon(Icons.arrow_upward),
+        (!ascending) ? Icon(Icons.arrow_downward) : Icon(Icons.arrow_upward),
         Icon(icon),
         Text(" " + sortName + " " + (ascending ? "Ascending" : "Descending"))
       ],),
     onPressed: () {
-      
+      sortPerfectMatchList(sortName, ascending);
+      boolModifier(sortName, ascending);
+      Navigator.pushNamed(context, ResultPageRoute);
     }
   );
 }
@@ -43,12 +88,9 @@ void sortDialog(BuildContext context) {
               )
             ),
 
-            sortButton(Icons.star_border, "Ratings", ratingAscending),
-            // sortButton(Icons.star_border, "Ratings", "Descending"),
-            sortButton(Icons.timer, "Time", timeAscending),
-            // sortButton(Icons.timer, "Time", "Descending"),
-            sortButton(Icons.sort_by_alpha, "Alphabetical", alphabeticalAscending),
-            // sortButton(Icons.sort_by_alpha, "Alphabetical", "Descending"),
+            sortButton(Icons.star_border, "Ratings", ratingAscending, context),
+            sortButton(Icons.timer, "Time", timeAscending, context),
+            sortButton(Icons.sort_by_alpha, "Alphabetical", alphabeticalAscending, context),
 
             SizedBox(height: 10),
             InkWell(
@@ -65,22 +107,9 @@ void sortDialog(BuildContext context) {
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
-                
               ),
               onTap: () { Navigator.of(context).pop(); }
             )
-            // RaisedButton(
-            //   color: Colors.grey[100],
-            //   onPressed: () {
-            //     Navigator.of(context).pop();
-            //   },
-            //   child: const Text(
-            //     'Go back',
-            //     style: TextStyle(
-            //       color: Colors.red,
-            //     )
-            //   )
-            // )
           ],),
       );
     }
