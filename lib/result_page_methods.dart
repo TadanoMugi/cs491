@@ -5,6 +5,88 @@ import 'globals.dart';
 
 double fontSizeValue = 13;
 
+RaisedButton sortButton(IconData icon, String sortName, bool ascending) {
+  return RaisedButton(
+    color: Colors.grey[100],
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        (ascending) ? Icon(Icons.arrow_downward) : Icon(Icons.arrow_upward),
+        Icon(icon),
+        Text(" " + sortName + " " + (ascending ? "Ascending" : "Descending"))
+      ],),
+    onPressed: () {
+      
+    }
+  );
+}
+
+void sortDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(32))),
+          contentPadding: EdgeInsets.only(top: 10),
+        title: const Text('Sort', textAlign: TextAlign.center),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            RichText(
+              textAlign: TextAlign.center,
+              text: new TextSpan(
+                text: 'Tap a button to select a sorting method\n',
+                style: const TextStyle(color: Colors.black87),
+              )
+            ),
+
+            sortButton(Icons.star_border, "Ratings", ratingAscending),
+            // sortButton(Icons.star_border, "Ratings", "Descending"),
+            sortButton(Icons.timer, "Time", timeAscending),
+            // sortButton(Icons.timer, "Time", "Descending"),
+            sortButton(Icons.sort_by_alpha, "Alphabetical", alphabeticalAscending),
+            // sortButton(Icons.sort_by_alpha, "Alphabetical", "Descending"),
+
+            SizedBox(height: 10),
+            InkWell(
+              child: Container(
+                padding: EdgeInsets.only(top: 20, bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(32),
+                    bottomRight: Radius.circular(32))
+                ),
+                child: Text(
+                  'Go back',
+                  style: TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+                
+              ),
+              onTap: () { Navigator.of(context).pop(); }
+            )
+            // RaisedButton(
+            //   color: Colors.grey[100],
+            //   onPressed: () {
+            //     Navigator.of(context).pop();
+            //   },
+            //   child: const Text(
+            //     'Go back',
+            //     style: TextStyle(
+            //       color: Colors.red,
+            //     )
+            //   )
+            // )
+          ],),
+      );
+    }
+  );
+}
+
 Widget getRecipeButtons() {
   List<Widget> list = new List<Widget>();
   // print("list length: " + perfectMatchList.length.toString());
@@ -113,7 +195,7 @@ Container timeSubSection(String time) {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        boldBlackText('Total Time: '),
+        boldBlackText('Time: '),
         (time == "null") ? regularBlackText('not specified') : regularBlackText(time)
       ],
     ),
