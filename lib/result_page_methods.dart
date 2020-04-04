@@ -119,7 +119,9 @@ void sortDialog(BuildContext context) {
 Widget getRecipeButtons() {
   List<Widget> list = new List<Widget>();
   // print("list length: " + perfectMatchList.length.toString());
-  for (int i = 0; i < perfectMatchList.length; i++) {
+  int i = (pageNumber * 10);
+  int j = (i + 10);
+  for ( ; i < j; i++) {
     list.add(recipeButton(i));
   }
   return new Column(children: list);
