@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+List<String> favorites = []; 
 class FavoritesPageView extends StatelessWidget {
   const FavoritesPageView({Key key}) : super(key: key);
 
@@ -16,4 +16,5 @@ class FavoritesPageView extends StatelessWidget {
     );
 
   }
+  
 }

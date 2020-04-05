@@ -4,6 +4,7 @@ import '_result_page.dart';
 import 'globals.dart';
 import 'routing_constants.dart';
 import 'sorting_methods.dart';
+import '_user_history_page.dart';
 
 double fontSizeValue = 13;
 
@@ -310,6 +311,7 @@ FlatButton recipeButton(int i) {
         ],
       ),
       onPressed: () {
+        history.add(perfectMatchList[i]);
         _launchURL(perfectMatchList[i].url);
       }
   );
