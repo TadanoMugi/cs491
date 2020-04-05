@@ -5,7 +5,7 @@ import 'globals.dart';
 import 'routing_constants.dart';
 import 'sorting_methods.dart';
 import '_user_history_page.dart';
-
+import '_user_favorites_page.dart';
 double fontSizeValue = 13;
 
 void boolModifier(String sortName, bool ascending) {
@@ -339,7 +339,11 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
           child: IconButton(
             icon: (_isFavorited ? Icon(Icons.favorite) : Icon(Icons.favorite_border)),
             color: Colors.red[500],
-            onPressed: _toggleFavorite,
+            onPressed: (){if(_isFavorited == false){
+              favorites.add(perfectMatchList[0]);
+            } else {
+              favorites.remove(perfectMatchList[0]);
+            }_toggleFavorite();}
           ),
         ),
       ],
