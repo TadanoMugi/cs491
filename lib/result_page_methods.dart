@@ -62,6 +62,7 @@ RaisedButton sortButton(IconData icon, String sortName, bool ascending, BuildCon
     onPressed: () {
       sortPerfectMatchList(sortName, ascending);
       boolModifier(sortName, ascending);
+      Navigator.pop(context);
       Navigator.pushNamed(context, ResultPageRoute);
     }
   );

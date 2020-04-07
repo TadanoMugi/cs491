@@ -33,7 +33,7 @@ class ResultPageView extends StatelessWidget {
       home: Scaffold(
         drawer: getDrawer(),
         appBar: AppBar(
-          title: Text('Search Results'),
+          title: Text('Search Result Recipes'),
           actions: <Widget>[
             Padding(
               padding: EdgeInsets.only(right: 20),
@@ -70,7 +70,8 @@ class ResultPageView extends StatelessWidget {
           elevation: 10.0,
           child: Icon(Icons.keyboard_backspace),
           onPressed: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
+            Navigator.pushNamed(context, SearchPageRoute);
           },),
         body: ListView(
           children: [

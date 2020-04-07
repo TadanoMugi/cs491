@@ -87,9 +87,9 @@ class HomePageView extends StatelessWidget {
       child: Row(
         mainAxisAlignment:MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(Colors.deepOrange[500], Icons.whatshot, 'CREATE', SearchPageRoute),
-          _buildButtonColumn(Colors.teal[400], Icons.map, 'RESULTS', TestPageRoute),
-          _buildButtonColumn(Colors.brown, Icons.directions_car, 'TEST PAGE', TestPageRoute),
+          _buildButtonColumn(Colors.deepOrange[500], Icons.whatshot, 'RECIPES', SearchPageRoute),
+          _buildButtonColumn(Colors.teal[400], Icons.map, 'SEARCH', TestPageRoute),
+          _buildButtonColumn(Colors.brown, Icons.directions_car, 'DELIVER', TestPageRoute),
         ],
       ),
     );
