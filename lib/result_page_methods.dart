@@ -229,7 +229,7 @@ Container timeSubSection(String time) {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        boldBlackText('Time: '),
+        boldBlackText('Total Time: '),
         (time == "null") ? regularBlackText('not specified') : regularBlackText(time)
       ],
     ),
