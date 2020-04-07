@@ -163,7 +163,8 @@ Widget getRecipehButtons() {
           imageRatingSection(favorites[i].image, i),
           titleTimeReviewSecion(
             favorites[i].name,
-            favorites[i].totalTime, 
+            favorites[i].totalTime,
+            favorites[i].relevance, 
             favorites[i].numReviews,
             // Make it look like a button
             // Title should be at top rather than centered in the middle
