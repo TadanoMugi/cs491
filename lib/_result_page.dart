@@ -28,7 +28,7 @@ class ResultPageView extends StatelessWidget {
       }
       // Navigator.pushNamed(context, ResultPageRoute);
     }
-    
+
     return MaterialApp(
       home: Scaffold(
         drawer: getDrawer(),
@@ -56,11 +56,11 @@ class ResultPageView extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.arrow_back_ios),
-              title: Text('Previous'),
+              title: Text('Previous $resultsPerPage pages'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.arrow_forward_ios),
-              title: Text('Next')
+              title: Text('Next $resultsPerPage pages')
             ),
           ],
           onTap: _onTap(_currentIndex)

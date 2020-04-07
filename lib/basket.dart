@@ -9,13 +9,31 @@ List<String> basket = [];
 
 Widget buildBasket(BuildContext context) {
 
-  void _showDialog() {
+  void _showDialogEmptyBasket() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: new Text("ERROR"),
           content: new Text("Basket is empty"),
+          actions: <Widget>[
+            new RaisedButton(
+              child: new Text("close"),
+              onPressed: () {Navigator.of(context).pop();},
+            )
+          ],
+        );
+      }
+    );
+  }
+
+  _showDialogEmptyList() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("ERROR"),
+          content: new Text("No Results from Ingredients Chosen."),
           actions: <Widget>[
             new RaisedButton(
               child: new Text("close"),
@@ -73,10 +91,13 @@ Widget buildBasket(BuildContext context) {
                 //searchDatabase(await copyOfRecipeDatabase, basket);
                 // await startDatabase();
                 if(basket.length == 0) {
-                  _showDialog();
+                  _showDialogEmptyBasket();
                 }
                 else {
                   searchDatabase(recipeTable, basket);
+                  if (perfectMatchList.length == 0) {
+                    _showDialogEmptyList();
+                  }
                   Navigator.pushNamed(context, ResultPageRoute);
                 }
             },

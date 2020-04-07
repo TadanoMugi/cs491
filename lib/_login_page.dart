@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'main.dart';
 import 'routing_constants.dart';
+import 'single_loggedIn.dart';
 
 class LoginPageView extends StatelessWidget {
   LoginPageView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    var s = singletonLoggedIn;
 
     Widget simpleButton(String str, String route) {
       return FlatButton(
@@ -59,7 +63,12 @@ class LoginPageView extends StatelessWidget {
                     child: Text('Next',),
                     onPressed: () {
                       /*logic for checking account?*/
-                      Navigator.pushNamed(context, HomePageRoute);
+                      s.loggedIn = true;
+                      // Navigator.pushNamed(context, HomePageRoute);
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                      return new MyApp();}));
                     },
                   )
                 )
