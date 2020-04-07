@@ -70,8 +70,8 @@ class ResultPageView extends StatelessWidget {
           elevation: 10.0,
           child: Icon(Icons.keyboard_backspace),
           onPressed: () {
-            // Navigator.pop(context);
-            Navigator.pushNamed(context, SearchPageRoute);
+            Navigator.pop(context);
+            // Navigator.pushNamed(context, SearchPageRoute);
           },),
         body: ListView(
           children: [
