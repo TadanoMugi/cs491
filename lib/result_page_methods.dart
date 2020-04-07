@@ -245,15 +245,15 @@ Container titleSubSection(String title) {
   );
 }
 
-Container sourceSubSection() {
+Container sourceSubSection(int relevance) {
   return Container(
     margin: EdgeInsets.all(5),
     child: Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        boldBlackText('Source: '),
-        regularBlackText('allrecipes.com'),
+        boldBlackText('Relevance: '),
+        regularBlackText(relevance.toString()),
       ],
     )
   );
@@ -273,7 +273,7 @@ Container reviewSubSection(int numReviews) {
   );
 }
 
-Container titleTimeReviewSecion(String title, String time, int numReviews) {
+Container titleTimeReviewSecion(String title, String time, int relevance, int numReviews) {
   return Container(
     margin: EdgeInsets.only(bottom: 5, left: 5, right: 5),
     child: Column(
@@ -284,7 +284,7 @@ Container titleTimeReviewSecion(String title, String time, int numReviews) {
         titleSubSection(title),
         SizedBox(height: 20,),
         timeSubSection(time),
-        sourceSubSection(),
+        sourceSubSection(relevance),
         reviewSubSection(numReviews)
       ],
     ),
@@ -305,6 +305,7 @@ FlatButton recipeButton(int i) {
           titleTimeReviewSecion(
             perfectMatchList[i].name,
             perfectMatchList[i].totalTime, 
+            perfectMatchList[i].relevance,
             perfectMatchList[i].numReviews,
             // Make it look like a button
             // Title should be at top rather than centered in the middle
