@@ -185,15 +185,15 @@ void searchDatabase(List<Recipe> recipeList, List<String> basket)
               if (recipeListIngredient.contains(ingredientSearched))
               {	
                 boolCounter++;
-                relevanceCounter++;
+                relevanceCounter++;                
+                break;
               }
             }
          }
          recipeList[tableIndex].relevance = relevanceCounter;
          if (boolCounter == basket.length)
          {
-           perfectMatchList.add(recipeList[tableIndex]);
-           
+           perfectMatchList.add(recipeList[tableIndex]);           
          }
       } // Table
       print ("Search Works!!!");
