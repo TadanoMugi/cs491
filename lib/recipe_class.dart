@@ -18,6 +18,7 @@ class Recipe
   String cookingTime;
   String totalTime;    
   String cuisine;
+  int relevance;
 
   Recipe()
   {
@@ -33,6 +34,7 @@ class Recipe
       this.cookingTime = "";
       this.totalTime = "";
       this.cuisine = "";
+      this.relevance = 0;
   }
 
   // SetRecipe(String name, Nutrition nutrition, List<String> ingredients, double score,int count, ByteBuffer image, 

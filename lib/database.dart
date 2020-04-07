@@ -37,7 +37,7 @@ class DatabasePageView extends StatelessWidget {
       }
         
       //Copy from asset
-      ByteData data = await rootBundle.load(join("assets/RFDB.db"));
+      ByteData data = await rootBundle.load(join("assets/RFDB2.db"));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       
       //Write and flush the bytes written
@@ -169,6 +169,7 @@ void searchDatabase(List<Recipe> recipeList, List<String> basket)
       {
         //bool perfectMatchCheck = true; 
         int boolCounter = 0;
+        int relevanceCounter = 0;
         for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
         {
             // Basket ingredient -> lower case
@@ -184,12 +185,15 @@ void searchDatabase(List<Recipe> recipeList, List<String> basket)
               if (recipeListIngredient.contains(ingredientSearched))
               {	
                 boolCounter++;
+                relevanceCounter++;
               }
             }
          }
+         recipeList[tableIndex].relevance = relevanceCounter;
          if (boolCounter == basket.length)
          {
            perfectMatchList.add(recipeList[tableIndex]);
+           
          }
       } // Table
       print ("Search Works!!!");
