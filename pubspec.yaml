@@ -22,7 +22,7 @@ flutter:
   assets:
      - images/logo.png
      - images/cookie.jpg
-     - assets/RFDB.db
+     - assets/RFDB2.db
      - images/gif_cry.gif
      - images/profile_default.png
      - images/under_construction.gif

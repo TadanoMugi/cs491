@@ -37,7 +37,7 @@ class DatabasePageView extends StatelessWidget {
       }
         
       //Copy from asset
-      ByteData data = await rootBundle.load(join("assets/RFDB.db"));
+      ByteData data = await rootBundle.load(join("assets/RFDB2.db"));
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       
       //Write and flush the bytes written
