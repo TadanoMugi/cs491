@@ -6,8 +6,6 @@
 'white sugar',
 'sugar',
 'chicken',
-
-'milk',
 'chocolate',
 'salt',
 'raisin',
