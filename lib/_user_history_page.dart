@@ -164,6 +164,7 @@ Widget getRecipehButtons() {
           titleTimeReviewSecion(
             history[i].name,
             history[i].totalTime, 
+            history[i].relevance,
             history[i].numReviews,
             // Make it look like a button
             // Title should be at top rather than centered in the middle
