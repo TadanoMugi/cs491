@@ -169,6 +169,7 @@ void searchDatabase(List<Recipe> recipeList, List<String> basket)
       {
         //bool perfectMatchCheck = true; 
         int boolCounter = 0;
+        int relevanceCounter = 0;
         for (int basketIndex = 0; basketIndex < basket.length; basketIndex++) 
         {
             // Basket ingredient -> lower case
@@ -184,12 +185,15 @@ void searchDatabase(List<Recipe> recipeList, List<String> basket)
               if (recipeListIngredient.contains(ingredientSearched))
               {	
                 boolCounter++;
+                relevanceCounter++;
               }
             }
          }
+         recipeList[tableIndex].relevance = relevanceCounter;
          if (boolCounter == basket.length)
          {
            perfectMatchList.add(recipeList[tableIndex]);
+           
          }
       } // Table
       print ("Search Works!!!");
