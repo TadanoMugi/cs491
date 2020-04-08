@@ -92,13 +92,11 @@ Widget buildBasket(BuildContext context) {
                 // await startDatabase();
                 if(basket.length == 0) {
                   _showDialogEmptyBasket();
-                }
-                else {
+                } else {
                   searchDatabase(recipeTable, basket);
                   if (perfectMatchList.length == 0) {
                     _showDialogEmptyList();
-                  }
-                  Navigator.pushNamed(context, ResultPageRoute);
+                  } else Navigator.pushNamed(context, ResultPageRoute);
                 }
             },
             textColor: Theme.of(context).primaryColor,
