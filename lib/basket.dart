@@ -61,6 +61,23 @@ Widget buildBasket(BuildContext context) {
             style: const TextStyle(color: Colors.black87),
           )
         ),
+        Card(
+          color: Colors.grey[200],
+          child: ListTile(
+            title: Text('Clear Basket',
+            style: TextStyle(fontWeight: FontWeight.w700),),
+            onTap: () {
+              basket.clear();
+              Navigator.pop(context);
+            }
+        )
+          // color: Colors.grey[100],
+          // textColor: Colors.blue[400],
+          // onTap: null,
+          // child: const Text(
+          //   'Clear Basket',
+          // ), 
+        ),
         Expanded(
           child: new MyBasket()
         ),

@@ -37,7 +37,7 @@ void sortPerfectMatchList(String sortName, bool ascending) {
       if (ascending) HighestRating(perfectMatchList);
       else LowestRating(perfectMatchList);
       break;
-    case "Time":
+    case "Cooking Time":
       if (ascending) TotalTimeAscending(perfectMatchList);
       else TotalTimeDescending(perfectMatchList);
       break;
@@ -92,7 +92,7 @@ void sortDialog(BuildContext context) {
             ),
 
             sortButton(Icons.star_border, "Ratings", ratingAscending, context),
-            sortButton(Icons.timer, "Time", timeAscending, context),
+            sortButton(Icons.timer, "Cooking Time", timeAscending, context),
             sortButton(Icons.sort_by_alpha, "Alphabetical", alphabeticalAscending, context),
 
             SizedBox(height: 10),
