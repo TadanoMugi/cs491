@@ -6,6 +6,7 @@ import 'routing_constants.dart';
 
 double fontSizeValue = 13;
 double tempWidth;
+String tempText = '';
 
 class ResultPageView extends StatelessWidget {
   const ResultPageView({Key key}) : super(key: key);
@@ -13,21 +14,6 @@ class ResultPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     tempWidth = MediaQuery.of(context).size.width - 188;
-    int _currentIndex = 0;
-
-    _onTap(int tabIndex) {
-      switch(tabIndex) {
-        case 0: 
-          if (pageNumber == 0) break;
-          else 
-            pageNumber--;
-          break;
-        case 1:
-          pageNumber++;
-          break;
-      }
-      // Navigator.pushNamed(context, ResultPageRoute);
-    }
 
     return MaterialApp(
       home: Scaffold(
@@ -51,21 +37,37 @@ class ResultPageView extends StatelessWidget {
             )
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.arrow_back_ios),
-              title: Text('Previous $resultsPerPage pages'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.arrow_forward_ios),
-              title: Text('Next $resultsPerPage pages')
-            ),
-          ],
-          onTap: _onTap(_currentIndex)
-
-        ),
+        bottomNavigationBar: 
+          Row(children: <Widget>[
+            SizedBox(width: 5,),
+            Expanded(child: RaisedButton(
+              color: Colors.blue[400],
+              textColor: Colors.white,
+              onPressed: () {
+                if(pageNumber > 0) {
+                  pageNumber--;
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, ResultPageRoute);
+                }
+              },
+              child: Text(
+                pageNumber == 0 ? '' : previousText()
+                ),
+            ),),
+            SizedBox(width: 5,),
+            Expanded(child: RaisedButton(
+              color: Colors.blue[400],
+              textColor: Colors.white,
+              onPressed: () {
+                pageNumber++;
+                Navigator.pop(context);
+                Navigator.pushNamed(context, ResultPageRoute);
+              },
+              child: Text(nextText()),
+            )),
+            SizedBox(width: 5,)
+          ],),
+        
         floatingActionButton: FloatingActionButton(
           elevation: 10.0,
           child: Icon(Icons.keyboard_backspace),
@@ -84,3 +86,18 @@ class ResultPageView extends StatelessWidget {
   } // Widget build
 
 } // class TestView
+
+String nextText() {
+  String tempText = 'Recipes ' + (pageNumber * 10 + 1).toString() 
+    + ' - '  + (pageNumber * 10 + 10).toString();
+  return tempText;
+}
+
+String previousText() {
+  tempText = '';
+  if (pageNumber > 0) {
+    tempText = 'Recipes ' + (pageNumber * 10 - 9).toString() 
+      + ' - ' + (pageNumber * 10).toString();
+  }
+  return tempText;
+}
