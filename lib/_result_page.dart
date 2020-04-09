@@ -88,8 +88,8 @@ class ResultPageView extends StatelessWidget {
 } // class TestView
 
 String nextText() {
-  String tempText = 'Recipes ' + (pageNumber * 10 + 1).toString() 
-    + ' - '  + (pageNumber * 10 + 10).toString();
+  String tempText = 'Recipes ' + (pageNumber * 10 + 11).toString() 
+    + ' - '  + (pageNumber * 10 + 20).toString();
   return tempText;
 }
 
