@@ -136,7 +136,7 @@ Image resizedImage(String originalImage) {
     width: 120,
     height: 120,
     scale: 3.5,
-    fit: BoxFit.none,
+    fit: BoxFit.cover,
   );
 }
 
