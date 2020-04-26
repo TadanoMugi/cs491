@@ -27,22 +27,51 @@ void AlphabeticalDescending (List<Recipe> listToBeSorted) // Z -> A
 void TotalTimeAscending(List<Recipe> listToBeSorted) // Ascending: Lowest -> Highest
 {
   // convert everything to minutes
-  listToBeSorted.sort((a,b) => convertTimeToMinutes(a.totalTime).compareTo(convertTimeToMinutes(b.totalTime)));
+  listToBeSorted.sort((a,b) => convertTimeToHoursAndMinutes(a.totalTime).compareTo(convertTimeToHoursAndMinutes(b.totalTime)));
 }
 
 void TotalTimeDescending(List<Recipe> listToBeSorted) // Descending: Highest -> Lowest
 {
- listToBeSorted.sort((a,b) => convertTimeToMinutes(b.totalTime).compareTo(convertTimeToMinutes(a.totalTime)));
+  Recipe recipe = new Recipe();
+ listToBeSorted.sort((a,b) => convertTimeToHoursAndMinutes(b.totalTime).compareTo(convertTimeToHoursAndMinutes(a.totalTime)));
+ if (listToBeSorted.contains(recipe.totalTime == "not"))
+ {
+   print ("YAHHHHO");
+ }
+//  for (int i = 0; i < listToBeSorted.length; i++)
+//  {
+//    if (listToBeSorted[i].totalTime.contains("not"))
+//    {
+
+//    }
+//  }
 }
 
+void NumberOfReviewsAscending(List<Recipe> listToBeSorted)
+{
+  listToBeSorted.sort((a, b) => a.numReviews.compareTo(b.numReviews));
+}
 
+void NumberOfReviewsDescending(List<Recipe> listToBeSorted)
+{
+  listToBeSorted.sort((a, b) => b.numReviews.compareTo(a.numReviews));
+}
 
+void RelevanceAscending(List<Recipe> listToBeSorted)
+{
+  listToBeSorted.sort((a, b) => a.relevance.compareTo(b.relevance));
+}
+
+void RelevanceDescending(List<Recipe> listToBeSorted)
+{
+  listToBeSorted.sort((a, b) => b.relevance.compareTo(a.relevance));
+}
 
 
 
 /////// HELPER FUNCTION ///////
 
-double convertTimeToMinutes(String totalTime)
+double convertTimeToHoursAndMinutes(String totalTime)
 {
   double day = 0;
   double hour = 0;
@@ -53,7 +82,7 @@ double convertTimeToMinutes(String totalTime)
   String temp;
 
   totalTime = totalTime.toLowerCase();
-  
+
   if (totalTime.contains("day") || totalTime.contains("days"))
   {
     temp = totalTime;
@@ -63,7 +92,6 @@ double convertTimeToMinutes(String totalTime)
       decrement = 2;
     }
     day = double.parse(temp.substring((temp.indexOf("day", 0)-decrement), temp.indexOf("day", 0)));
-    print("DAY: " + day.toString());
   }
   if (totalTime.contains("hour") || totalTime.contains("hours"))
   {
@@ -74,7 +102,6 @@ double convertTimeToMinutes(String totalTime)
       decrement = 2;
     }
     hour = double.parse(temp.substring((temp.indexOf("hour", 0)-decrement), temp.indexOf("hour", 0)));
-    print("Hour: " + hour.toString());
   }
   if (totalTime.contains("minute") || totalTime.contains("minutes"))
   {
@@ -86,7 +113,7 @@ double convertTimeToMinutes(String totalTime)
     }
     
     minute = double.parse(temp.substring((temp.indexOf("min", 0)-decrement), temp.indexOf("min", 0)));
-    print("Min: " + minute.toString());
+
   }
   
   if (totalTime.contains("second") || totalTime.contains("seconds"))
@@ -98,8 +125,8 @@ double convertTimeToMinutes(String totalTime)
       decrement = 2;
     }
     second = double.parse(temp.substring((temp.indexOf("sec", 0)-decrement), temp.indexOf("sec", 0)));
-    print("sec: " + second.toString());
   }
 
-  return ((day * 24 * 60) + (hour * 60) + (minute) + (second/60));
+//  return ((day * 24 * 60) + (hour * 60) + (minute) + (second/60));
+    return ( (day * 24) + (hour) + (minute/60));
 }
