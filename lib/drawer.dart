@@ -30,7 +30,7 @@ class MyDrawer extends StatelessWidget {
             fit: BoxFit.none,
           ),
           SizedBox(height: 10),
-          Text('*username*', style: TextStyle(fontSize: 20),)
+          Text('chris', style: TextStyle(fontSize: 20),)
           ],))),
           
           SizedBox(height: 10),
@@ -50,7 +50,7 @@ class MyDrawer extends StatelessWidget {
                   children: [
                     Icon(Icons.history, size: 40),
                     SizedBox(width: 15),
-                    Text('*History*', style: TextStyle(fontSize: 20),),
+                    Text('History', style: TextStyle(fontSize: 20),),
                   ])
               )),
               onTap: () {
@@ -76,7 +76,7 @@ class MyDrawer extends StatelessWidget {
                   children: [
                     Icon(Icons.favorite, size: 40),
                     SizedBox(width: 15),
-                    Text('*Favorites*', style: TextStyle(fontSize: 20),),
+                    Text('Favorites', style: TextStyle(fontSize: 20),),
                   ])
               )),
               onTap: () {
@@ -102,7 +102,7 @@ class MyDrawer extends StatelessWidget {
                   children: [
                     Icon(Icons.phonelink_setup, size: 40),
                     SizedBox(width: 15),
-                    Text('*Preferences*', style: TextStyle(fontSize: 20),),
+                    Text('Preferences', style: TextStyle(fontSize: 20),),
                   ])
               )),
               onTap: () {
@@ -129,7 +129,7 @@ class MyDrawer extends StatelessWidget {
                   children: [
                     Icon(Icons.backspace, size: 40),
                     SizedBox(width: 15),
-                    Text('*Log Out*', style: TextStyle(fontSize: 20),),
+                    Text('Log Out', style: TextStyle(fontSize: 20),),
                   ])
               )),
               onTap: () {

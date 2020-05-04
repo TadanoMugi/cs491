@@ -22,12 +22,12 @@ class LoginPageView extends StatelessWidget {
     return MaterialApp(
        home: Scaffold(
          appBar: AppBar(title: Text('Account Login')),
-         body: Column(
+         body: ListView(
            children: <Widget>[
               /*login text*/
               Container(
                 padding: const EdgeInsets.only(top: 20),
-                child: Text('Log in to your account',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700))
+                child: Text('                Log in to your account',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700))
               ),
               /*email text field*/
               Container(
@@ -35,7 +35,7 @@ class LoginPageView extends StatelessWidget {
                 child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Enter Email'
+                    hintText: 'Enter Username'
                   ),
                 )
               ),
@@ -47,6 +47,7 @@ class LoginPageView extends StatelessWidget {
                     border: OutlineInputBorder(),
                     hintText: 'Enter Password'
                   ),
+                  obscureText: true,
                 )
               ),
               /*forgot email button*/

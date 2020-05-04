@@ -30,7 +30,7 @@ class MyDrawerLogin extends StatelessWidget {
                 children: [
                   Icon(Icons.input, size: 40),
                   SizedBox(width: 15),
-                  Text('*Log In*', style: TextStyle(fontSize: 20),),
+                  Text('Log In', style: TextStyle(fontSize: 20),),
                 ])
             )),
             onTap: () {

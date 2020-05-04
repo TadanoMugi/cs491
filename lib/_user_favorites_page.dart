@@ -169,7 +169,7 @@ Widget getRecipehButtons() {
             // Make it look like a button
             // Title should be at top rather than centered in the middle
           ),
-          FavoriteWidget(),
+          Icon(Icons.favorite, color: Colors.red),
         ],
       ),
       onPressed: () {

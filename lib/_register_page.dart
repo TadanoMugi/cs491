@@ -20,12 +20,12 @@ class RegisterPageView extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Create New Account')),
-        body: Column(
+        body: ListView(
           children: <Widget>[
             /*login text*/
               Container(
                 padding: const EdgeInsets.only(top: 20),
-                child: Text('Create a new account',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700))
+                child: Text('               Create a new account',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700))
               ),
             /*email text field*/
             Container(
@@ -37,6 +37,16 @@ class RegisterPageView extends StatelessWidget {
                   ),
                 )
               ),
+              /*username text field*/
+              Container(
+                padding: const EdgeInsets.only(right: 40, left: 40, bottom: 30),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter Username'
+                  ),
+                )
+              ),
               /*password text field*/
               Container(
                 padding: const EdgeInsets.only(right: 40, left: 40, bottom: 30),
@@ -45,6 +55,7 @@ class RegisterPageView extends StatelessWidget {
                     border: OutlineInputBorder(),
                     hintText: 'Enter Password'
                   ),
+                  obscureText: true,
                 )
               ),
               /*password confirm text field*/
@@ -55,6 +66,7 @@ class RegisterPageView extends StatelessWidget {
                     border: OutlineInputBorder(),
                     hintText: 'Confirm Password'
                   ),
+                  obscureText: true,
                 )
               ),
               Container(child: Row(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[

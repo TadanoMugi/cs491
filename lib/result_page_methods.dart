@@ -254,6 +254,8 @@ Container sourceSubSection(int relevance) {
       children: <Widget>[
         boldBlackText('Relevance: '),
         regularBlackText(relevance.toString()),
+        regularBlackText(' / '),
+        regularBlackText(relevance.toString()),
       ],
     )
   );
@@ -343,9 +345,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
             icon: (_isFavorited ? Icon(Icons.favorite) : Icon(Icons.favorite_border)),
             color: Colors.red[500],
             onPressed: (){if(_isFavorited == false){
-              favorites.add(perfectMatchList[0]);
+              favorites.add(perfectMatchList[7]);
             } else {
-              favorites.remove(perfectMatchList[0]);
+              favorites.remove(perfectMatchList[7]);
             }_toggleFavorite();}
           ),
         ),

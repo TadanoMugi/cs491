@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '_result_page.dart';
 import 'drawer_methods.dart';
 import 'result_page_methods.dart';
-List<Recipe> history = [];
+// List<Recipe> history = [];
 class HistoryPageView extends StatelessWidget {
   const HistoryPageView({Key key}) : super(key: key);
 
